@@ -1,0 +1,32 @@
+Trading_Model_1st_Generation/
+├── README.md
+├── requirements.txt
+├── .autosync/
+│   ├── autosync.lock
+│   ├── autosync.log
+│   └── autosync.ps1
+├── backtest/
+│   ├── README.md
+│   └── __init__.py
+├── data/
+│   ├── README.md
+│   └── __init__.py
+├── execution/
+│   ├── README.md
+│   └── __init__.py
+├── feedback/
+│   ├── README.md
+│   └── __init__.py
+├── monitor/
+│   ├── README.md
+│   └── __init__.py
+├── portfolio/
+│   ├── README.md
+│   └── __init__.py
+├── risk/
+│   ├── README.md
+│   └── __init__.py
+└── strategy/
+    ├── Interactive - pairs_trading_gld_gdx.py.ipynb
+    ├── README.md
+    └── __init__.py
