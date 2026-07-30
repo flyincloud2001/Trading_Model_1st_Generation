@@ -1,0 +1,47 @@
+Trading_Model_1st_Generation/
+├── README.md
+├── requirements.txt
+├── .autosync/
+│   ├── autosync.lock
+│   ├── autosync.log
+│   └── autosync.ps1
+├── backtest/
+│   ├── README.md
+│   └── __init__.py
+├── data/
+│   ├── README.md
+│   └── __init__.py
+├── execution/
+│   ├── README.md
+│   └── __init__.py
+├── feedback/
+│   ├── README.md
+│   └── __init__.py
+├── monitor/
+│   ├── README.md
+│   └── __init__.py
+├── portfolio/
+│   ├── README.md
+│   └── __init__.py
+├── risk/
+│   ├── README.md
+│   └── __init__.py
+└── strategy/
+    ├── README.md
+    └── __init__.py 
+
+我現在想做一個配對交易策略，內容涵蓋
+1.第一優先（直接用到) 
+Quantitative Trading Ch.7：直接講配對交易流程，先讀這個，
+2.第二優先（統計基礎）
+Analysis of Financial Time Series Ch.8：共整合與 ECM 的嚴謹推導
+Analysis of Financial Time Series Ch.2：ADF 檢定的理論背景
+3.第三優先（回測品質）
+López de Prado Ch.3、Ch.7、Ch.12：標籤設計與 CV 避免偏差。
+
+我的想法是
+1.你先讀上述指定的內容，並將概念套用到USO/BNO股票，
+2.你先給我第一次回復，告訴我你如何分割你閱讀到的概念(這一步你將決定如何將不同概念分裝至不同的程式碼檔案中)
+3.我閱讀你分割的概念
+4.我一步一步按照概念分別去生成程式碼
+你認為呢?
