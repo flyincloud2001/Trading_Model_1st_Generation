@@ -44,13 +44,10 @@ def fetch_single(symbol: str,
     raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
 
 
-    raw = yf.download(SYMBOL, start=START, end=END, auto_adjust=True)
-
-# 只取收盤價，並去除缺失值
-data_full = pd.DataFrame(raw['Close'])
-data_full.columns = [SYMBOL]
-data_full.dropna(inplace=True)
-
+    raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True)
+    df = pd.DataFrame(raw[["Open", "High", "Low", "Close", "Volume"]])
+    df.columns = [symbol]
+    df.dropna(inplace=True)
 
     # 檢查是否成功下載
     if df.empty:
