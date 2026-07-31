@@ -37,6 +37,7 @@ def calc_halflife(spread: pd.Series) -> float:
     delta_spread = delta_spread.dropna()
 
     # OLS 回歸：delta_spread = lambda * spread_lag + mu
+    # mu is the average of  
     X = add_constant(spread_lag)
     result = OLS(delta_spread, X).fit()
     lambda_ = result.params.iloc[1]
