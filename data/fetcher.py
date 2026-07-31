@@ -37,7 +37,7 @@ def fetch_single(symbol: str,
              2010-01-05  107.16  107.69  106.75  107.45  10925200
     """
     # 建立 CSV 儲存資料夾（若不存在則自動建立）
-    os.makedirs(data_dir, exist_ok=True)T
+    os.makedirs(data_dir, exist_ok=True)
 
     # 下載資料
     print(f"[fetcher] 正在下載 {symbol} 的資料（{start_date} 至 {end_date}）...")
