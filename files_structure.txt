@@ -5,28 +5,58 @@ Trading_Model_1st_Generation/
 │   ├── autosync.lock
 │   ├── autosync.log
 │   └── autosync.ps1
-├── backtest/
-│   ├── README.md
-│   └── __init__.py
+│
 ├── data/
+│   ├── __init__.py
 │   ├── README.md
-│   └── __init__.py
-├── execution/
+│   ├── fetcher.py
+│   ├── loader.py
+│   └── csv/
+│       ├── GLD_2010-01-01_2024-01-01.csv
+│       ├── GDX_2010-01-01_2024-01-01.csv
+│       └── ...
+│
+├── strategy/
+│   ├── __init__.py
 │   ├── README.md
-│   └── __init__.py
-├── feedback/
+│   ├── cointegration.py
+│   ├── hedge_ratio.py
+│   ├── signals.py
+│   └── Interactive_-_pairs_trading_gld_gdx_py.ipynb
+│
+├── backtest/
+│   ├── __init__.py
 │   ├── README.md
-│   └── __init__.py
-├── monitor/
-│   ├── README.md
-│   └── __init__.py
-├── portfolio/
-│   ├── README.md
-│   └── __init__.py
+│   ├── engine.py
+│   └── metrics.py
+│
 ├── risk/
+│   ├── __init__.py
 │   ├── README.md
-│   └── __init__.py
-└── strategy/
-    ├── Interactive - pairs_trading_gld_gdx.py.ipynb
+│   └── kelly.py
+│
+├── portfolio/
+│   ├── __init__.py
+│   ├── README.md
+│   └── allocator.py
+│
+├── monitor/
+│   ├── __init__.py
+│   ├── README.md
+│   ├── account.py
+│   ├── tracker.py
+│   └── logs/
+│       └── monitor_YYYYMMDD.log
+│
+├── execution/
+│   ├── __init__.py
+│   ├── README.md
+│   └── order.py
+│
+└── feedback/
+    ├── __init__.py
     ├── README.md
-    └── __init__.py
+    ├── evaluator.py
+    └── reports/
+        ├── pnl_comparison_YYYYMMDD.csv
+        └── cointegration_YYYYMMDD.csv
