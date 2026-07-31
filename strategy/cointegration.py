@@ -124,10 +124,10 @@ if __name__ == "__main__":
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     from data.loader import load_multiple
 
-    data = load_multiple(["USO", "BNO"])
-    data["USO"], data["BNO"] = data["USO"].align(data["BNO"], join="inner")
+    data = load_multiple(["EWA", "EWC"])
+    data["EWA"], data["EWC"] = data["USO"].align(data["EWC"], join="inner")
     result = cadf_test(
-        series_y=data["USO"]["Close"],
-        series_x=data["BNO"]["Close"]
+        series_y=data["EWA"]["Close"],
+        series_x=data["EWC"]["Close"]
     )
     print(result)
