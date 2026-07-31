@@ -46,7 +46,7 @@ def load_single(symbol: str,
     df = pd.read_csv(filepath, index_col="Date", parse_dates=True)
 
     return df
-
+    
 
 def load_multiple(symbols: list,
                   data_dir: str = DEFAULT_DATA_DIR) -> dict:
