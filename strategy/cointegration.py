@@ -124,9 +124,9 @@ if __name__ == "__main__":
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     from data.loader import load_multiple
 
-    data = load_multiple(["USO", "BNO"])
+    data = load_multiple(["GLD", "GDX"])
     result = cadf_test(
-        series_y=data["USO"]["Close"],
-        series_x=data["BNO"]["Close"]
+        series_y=data["GLD"]["Close"],
+        series_x=data["GDX"]["Close"]
     )
     print(result)
