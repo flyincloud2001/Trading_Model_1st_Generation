@@ -41,12 +41,11 @@ def fetch_single(symbol: str,
 
     # 下載資料
     print(f"[fetcher] 正在下載 {symbol} 的資料（{start_date} 至 {end_date}）...")
+    
     raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
-
-
-    raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True)
-    df = pd.DataFrame(raw[["Open", "High", "Low", "Close", "Volume"]])
-    df.columns = [symbol]
+    df = raw[["Open", "High", "Low", "Close", "Volume"]].copy()
+    df.columns = ["Open", "High", "Low", "Close", "Volume"]
+    df.index.name = "Date"
     df.dropna(inplace=True)
 
     # 檢查是否成功下載
