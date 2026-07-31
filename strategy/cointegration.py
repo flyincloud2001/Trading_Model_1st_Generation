@@ -125,6 +125,7 @@ if __name__ == "__main__":
     from data.loader import load_multiple
 
     data = load_multiple(["USO", "BNO"])
+    data["USO"], data["BNO"] = data["USO"].align(data["BNO"], join="inner")
     result = cadf_test(
         series_y=data["USO"]["Close"],
         series_x=data["BNO"]["Close"]
