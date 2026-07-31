@@ -44,7 +44,7 @@ def load_single(symbol: str,
 
     # 讀取 CSV，將 Date 欄位設為 index 並轉為 datetime 格式
     df = pd.read_csv(filepath, index_col="Date", parse_dates=True)
-
+    
     return df
     
 
