@@ -22,11 +22,11 @@
 每個模組的詳細說明請參考各自資料夾內的 README.md。
 
 ## Files Dependency
-data/loader.py
-    ↓
-strategy/cointegration.py  →  半衰期、CADF 檢定
-    ↓
-strategy/hedge_ratio.py    →  動態 hedge ratio、spread
+data/loader.py  
+    ↓  
+strategy/cointegration.py  →  半衰期、CADF 檢定  
+    ↓  
+strategy/hedge_ratio.py    →  動態 hedge ratio、spread  
     ↓
 strategy/signals.py        →  Z-score、進出場信號
     ↓
