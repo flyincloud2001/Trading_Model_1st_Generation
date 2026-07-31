@@ -41,7 +41,16 @@ def fetch_single(symbol: str,
 
     # 下載資料
     print(f"[fetcher] 正在下載 {symbol} 的資料（{start_date} 至 {end_date}）...")
-    df = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
+    raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
+
+
+    raw = yf.download(SYMBOL, start=START, end=END, auto_adjust=True)
+
+# 只取收盤價，並去除缺失值
+data_full = pd.DataFrame(raw['Close'])
+data_full.columns = [SYMBOL]
+data_full.dropna(inplace=True)
+
 
     # 檢查是否成功下載
     if df.empty:
