@@ -45,7 +45,7 @@ def fetch_single(symbol: str,
 
     # 檢查是否成功下載
     if df.empty:
-        raise ValueError(f"[fetcher] 下載失敗：{symbol} 沒有資料，請確認股票代號是否正確。")
+        raise   (f"[fetcher] 下載失敗：{symbol} 沒有資料，請確認股票代號是否正確。")
 
     # 只保留需要的欄位
     df = df[["Open", "High", "Low", "Close", "Volume"]]
