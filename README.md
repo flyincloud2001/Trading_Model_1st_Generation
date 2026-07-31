@@ -21,7 +21,7 @@
 
 每個模組的詳細說明請參考各自資料夾內的 README.md。
 
-## How to use this model
+## Files Dependency
 data/loader.py
     ↓
 strategy/cointegration.py  →  半衰期、CADF 檢定
