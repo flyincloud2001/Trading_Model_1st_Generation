@@ -26,8 +26,9 @@ def fetch_single(symbol: str,
     raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
 
     df = raw[['Open', 'Close', 'High', 'Low', 'Volume']]
-    raw.reset_index(drop=True, inplace=True)
-    print(raw)
+    df.columns = ["Open", "High", "Low", "Close", "Volume"]
+    df.index.name = "Date"
+    print(df)
 fetch_single("GLD")
     
 # fetch_single(symbol, start_date, end_date, data_dir)
