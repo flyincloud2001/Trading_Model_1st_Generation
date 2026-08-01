@@ -26,7 +26,7 @@ def fetch_single(symbol: str,
 
     raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
 
-    
+    df = 
     
 # fetch_single(symbol, start_date, end_date, data_dir)
 # 下載單一股票的日線 OHLCV 資料並儲存為 CSV。
