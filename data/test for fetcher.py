@@ -17,11 +17,16 @@ DEFAULT_START_DATE = '2010-01-01'
 DEFAULT_END_DATE = datetime.today().strftime("%Y-%m-%d")
 DEFAULT_DATA_DIR = os.path.join(os.path.dirname(__file__), "csv")
 
-def fetch_single(symbol, start_date, end_date, data_dir):
+def fetch_single(symbol: str, 
+                 start_date: str = DEFAULT_START_DATE, 
+                 end_date: str = DEFAULT_END_DATE, 
+                 data_dir: str = DEFAULT_DATA_DIR) -> pd.DataFrame:
 
     os.makedirs(data_dir, exists_ok=True)
 
-    raw = yf.download(symbol: str, start=start_date, end=end_date, auto_adjust=True, progress=False)
+    raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
+
+    
     
 # fetch_single(symbol, start_date, end_date, data_dir)
 # 下載單一股票的日線 OHLCV 資料並儲存為 CSV。
