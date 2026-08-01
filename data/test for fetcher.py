@@ -22,7 +22,7 @@ def fetch_single(symbol: str,
                  end_date: str = DEFAULT_END_DATE, 
                  data_dir: str = DEFAULT_DATA_DIR) -> pd.DataFrame:
 
-    os.makedirs(data_dir, exists_ok=True)
+    os.makedirs(data_dir, exist_ok=True)
 
     raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
 
