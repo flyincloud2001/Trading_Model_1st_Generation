@@ -4,6 +4,8 @@
 
 import yfinance as yf
 import os
+import pandas as pd
+import datetime as datetime
 
 # ============================================================
 # 可調整參數區（未來新增策略時在此修改預設值）
