@@ -14,7 +14,7 @@ import datetime as datetime
 # DEFAULT_END_DATE     預設結束日期（今天）
 # DEFAULT_DATA_DIR     CSV 儲存資料夾
 DEFAULT_START_DATE = '2010-01-01'
-DEFAULT_END_DATE = datetime.today()
+DEFAULT_END_DATE = datetime.today().strftime("")
 
 # fetch_single(symbol, start_date, end_date, data_dir)
 # 下載單一股票的日線 OHLCV 資料並儲存為 CSV。
