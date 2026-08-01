@@ -19,24 +19,7 @@ def fetch_single(symbol: str,
                  start_date: str = DEFAULT_START_DATE,
                  end_date: str = DEFAULT_END_DATE,
                  data_dir: str = DEFAULT_DATA_DIR) -> pd.DataFrame:
-    """
-    下載單一股票的日線 OHLCV 資料並儲存為 CSV。
 
-    參數：
-        symbol     : 股票代號，例如 "GLD" 或 "EWA"
-        start_date : 起始日期，格式 "YYYY-MM-DD"
-        end_date   : 結束日期，格式 "YYYY-MM-DD"
-        data_dir   : CSV 儲存資料夾路徑
-
-    回傳：
-        df : 包含 Open, High, Low, Close, Volume 的 DataFrame
-             例如：
-                         Open    High     Low   Close    Volume
-             Date
-             2010-01-04  107.35  107.49  106.55  107.16  13561200
-             2010-01-05  107.16  107.69  106.75  107.45  10925200
-    """
-    # 建立 CSV 儲存資料夾（若不存在則自動建立）
     os.makedirs(data_dir, exist_ok=True)
 
     # 下載資料
@@ -68,23 +51,7 @@ def fetch_multiple(symbols: list,
                    start_date: str = DEFAULT_START_DATE,
                    end_date: str = DEFAULT_END_DATE,
                    data_dir: str = DEFAULT_DATA_DIR) -> dict:
-    """
-    批次下載多個股票的日線資料並各自儲存為 CSV。
 
-    參數：
-        symbols    : 股票代號清單，例如 ["GLD", "GDX", "EWA", "EWC"]
-        start_date : 起始日期
-        end_date   : 結束日期
-        data_dir   : CSV 儲存資料夾路徑
-
-    回傳：
-        data : 以股票代號為 key 的字典，每個 value 是對應的 DataFrame
-               例如：
-               {
-                   "GLD": DataFrame(...),
-                   "GDX": DataFrame(...)
-               }
-    """
     data = {}
     for symbol in symbols:
         try:
