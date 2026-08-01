@@ -5,8 +5,7 @@
 import yfinance as yf
 import os
 import pandas as pd
-import datetime as datetime
-
+from datetime import datetime
 # ============================================================
 # 可調整參數區（未來新增策略時在此修改預設值）
 # ============================================================
@@ -27,6 +26,7 @@ def fetch_single(symbol: str,
     raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
 
     print(raw)
+fetch_single("GLD")
     
 # fetch_single(symbol, start_date, end_date, data_dir)
 # 下載單一股票的日線 OHLCV 資料並儲存為 CSV。
