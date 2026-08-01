@@ -15,8 +15,11 @@ import datetime as datetime
 # DEFAULT_DATA_DIR     CSV 儲存資料夾
 DEFAULT_START_DATE = '2010-01-01'
 DEFAULT_END_DATE = datetime.today().strftime("%Y-%m-%d")
-DEFAULT_DATA_DIR = os.path.join(os.path.file)
+DEFAULT_DATA_DIR = os.path.join(os.path.dirname(__file__), "csv")
 
+def fetch_single(symbol, start_data, end_data, data_dir):
+
+    raw = yf.download(symbo)
 # fetch_single(symbol, start_date, end_date, data_dir)
 # 下載單一股票的日線 OHLCV 資料並儲存為 CSV。
 #
