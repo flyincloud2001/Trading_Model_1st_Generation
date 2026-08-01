@@ -29,6 +29,7 @@ def fetch_single(symbol: str,
     print(df)
 
     df.columns = ["Open", "High", "Low", "Close", "Volume"]
+    print(df)
     df.index.name = "Date"
     print(df)
 fetch_single("GLD")
