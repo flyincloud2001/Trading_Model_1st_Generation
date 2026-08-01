@@ -19,7 +19,7 @@ DEFAULT_DATA_DIR = os.path.join(os.path.dirname(__file__), "csv")
 
 def fetch_single(symbol, start_data, end_data, data_dir):
 
-    raw = yf.download(symbo)
+    raw = yf.download(symbol, start_data, end_data, auto)
 # fetch_single(symbol, start_date, end_date, data_dir)
 # 下載單一股票的日線 OHLCV 資料並儲存為 CSV。
 #
