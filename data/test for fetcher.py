@@ -26,8 +26,7 @@ def fetch_single(symbol: str,
     raw = yf.download(symbol, start=start_date, end=end_date, auto_adjust=True, progress=False)
 
     df = raw[['Open', 'Close', 'High', 'Low', 'Volume']]
-    print(len(raw.columns))
-
+    raw.reset_index(drop=True)
     print(raw)
 fetch_single("GLD")
     
