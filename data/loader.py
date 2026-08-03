@@ -13,7 +13,7 @@ DEFAULT_DATA_DIR = os.path.join(os.path.dirname(__file__), "csv")
 def load_single(symbol: str,
                 data_dir: str = DEFAULT_DATA_DIR) -> pd.DataFrame:
     """
-    從 CSV 讀取單一股票的歷史資料。
+    從 CSV 讀取單一股票的歷史資料   。
     自動尋找該股票代號最新的 CSV 檔案。
 
     參數：
