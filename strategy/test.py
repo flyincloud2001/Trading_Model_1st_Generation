@@ -14,7 +14,8 @@ data = load_multiple(["GLD", "GDX"])
 gld = data['GLD']['Close']
 gdx = data['GDX']['Close']
 
-gld, gdx = gld.align(gdx.index)
+gld, gdx = gld.align(gdx, join='inner')
+
 
 series_y = series_y[series_y.index >=
                         series_y.index.max() - pd.DateOffset(years=2)]
