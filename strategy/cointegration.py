@@ -79,6 +79,11 @@ def cadf_test(series_y: pd.Series,
                      "adf_statistic": -3.56
                  }
     """
+    series_y = series_y[series_y.index >= 
+                        series_y.index.max() - pd.DateOffset(years=2)]
+    series_x = series_x[series_x.index >= 
+                        series_x.index.max() - pd.DateOffset(years=2)]
+    
     # 步驟一：OLS 回歸取殘差
     X = add_constant(series_x)
     ols_result = OLS(series_y, X).fit()
