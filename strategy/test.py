@@ -13,9 +13,9 @@ gld = data['GLD']['Close']
 gdx = data['GDX']['Close']
 
 result = cadf_test(gld, gdx)
-print(result)
+hedge_ratio = result['hedge_ratio']
 
-spread = gld - gdx
+spread = gld - hedge_ratio* gdx
 
 fig, ax = plt.subplots(figsize=(12, 5))
 ax.plot(spread)
