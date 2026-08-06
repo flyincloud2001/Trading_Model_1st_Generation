@@ -14,7 +14,7 @@ data = load_multiple(["GLD", "GDX"])
 gld = data['GLD']['Close']
 gdx = data['GDX']['Close']
 
-result = cadf_test(gld, gdx)
+hedge_ratios=  calc_rolling_hedge_ratio(gld, gdx, )
 hedge_ratio = result['hedge_ratio']
 
 spread = gld - hedge_ratio* gdx
