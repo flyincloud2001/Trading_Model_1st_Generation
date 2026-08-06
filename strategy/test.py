@@ -13,7 +13,7 @@ gdx = data['GDX']['Close']
 
 spread = gld - gdx
 
-fig, ax = plt.subplot(figsize=(12, 5))
+fig, ax = plt.subplots(figsize=(12, 5))
 ax.plot(spread)
 plt.show()
 
