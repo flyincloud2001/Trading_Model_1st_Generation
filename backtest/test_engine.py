@@ -1,7 +1,7 @@
 # engine.py
 # 負責執行配對交易的回測邏輯
 # 根據 signals.py 生成的信號，計算每日損益與持倉
-
+import pandas as pd
 
 
 
@@ -40,9 +40,10 @@ def run_backtest(series_y: pd.Series,
                   2010-02-09     0.0     -0.0008             0.0030  0.0010
     """
     # 對齊所有序列的日期
-
+    df = pd.DataFrame[['price_y', 'price_x', signals['signal']]]
+    df['p']
     # 計算每日報酬率
-
+    df['return_y'] = df['price_y'].pct_change()
     # 計算倉位變化（用來判斷是否有交易發生）
 
     # 計算每日策略損益（用前一天的信號乘以今天的報酬）
