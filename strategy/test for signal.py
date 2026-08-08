@@ -115,9 +115,10 @@ if __name__ == "__main__":
     cadf_result = cadf_test(gld, gdx)
     spread = cadf_result['spread']
     lookback = cadf_result['half_life']
+    print(lookback)
 
     # 計算 Z-score 與信號
     zscore = calc_zscore(spread, int(lookback))
     signals = generate_signals(zscore)
 
-    print(signals)
+    print(signals.head(10))
