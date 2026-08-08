@@ -35,7 +35,8 @@ def calc_zscore(spread: pd.Series,
     """
     # 只用 rolling std，不減 rolling mean（OLS 殘差均值為 0）
      
-    zscore = 
+    zscore = (spread - rolling_mean)/std
+    
 
 def generate_signals(zscore: pd.Series,
                      entry_zscore: float = 2.0,
