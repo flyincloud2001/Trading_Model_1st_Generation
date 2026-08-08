@@ -46,12 +46,17 @@ def run_backtest(series_y: pd.Series,
 
     # 計算每日報酬率
     df['return_y'] = df['price_y'].pct_change()
+    df['return_x'] = df['price_x'].pct_change()
+    df.drop(inplace=True)
+
     # 計算倉位變化（用來判斷是否有交易發生）
+    df['signal_prev'] = df['signal'].shift(1).fillna(0.0)
+    df['position_changes'] = (df['signal'] != df['signal_prev']).astype(float)
 
     # 計算每日策略損益（用前一天的信號乘以今天的報酬）
     # signal = +1：做多 Y，做空 X
     # signal = -1：做空 Y，做多 X
-
+    df['']
     # 計算交易成本（每次倉位改變時收取）
 
     # 每日淨損益
