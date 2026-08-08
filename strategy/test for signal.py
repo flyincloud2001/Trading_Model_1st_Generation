@@ -78,11 +78,11 @@ def generate_signals(zscore: pd.Series,
     signals.loc[zscore < -entry_zscore, 'signal'] = 1
 
     # 出場信號：spread 回歸均值，平倉
-    signals.loc[zscore.abs() < exit_zscore] = 0
+    signals.loc[zscore.abs() < exit_zscore, 'signal'] = 0
     
     # 介於進出場閾值之間的時間點設為 NaN，再用前值填充（維持倉位）
     signals.loc[(zscore.abs() <= entry_zscore) &
-                (zscore.abs() >= -entry_zscore), 
+                (zscore.abs() >= exit_zscore), 
                 'signal'] = None
 
     signals['signal'] = signals['signal'].ffill().fillna(0.0)
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     # 載入資料
     import sys
     import os
-    sys.path.append()
+    sys.path.append(os.path.join(os.path.dirname(__file__, "..")))
     # 以全部資料長度 T 為 in-sample，取得固定 hedge ratio 與 residuals
     # 實際使用時，in-sample 應為回測起始日往回推 T 天，out-of-sample 才是回測區間
 
