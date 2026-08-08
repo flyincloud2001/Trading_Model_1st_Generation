@@ -98,9 +98,9 @@ if __name__ == __main__:
     hedge_ratio = cadf_result['hedge_ratio']
     lookback = cadf_result['half_life']
 
-    zscore = calc_zscore(spread, int(lookback)
+    zscore = calc_zscore(spread, int(lookback))
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
 
-    print(backtest_result.tail(
+    print(backtest_result.tail(10))
