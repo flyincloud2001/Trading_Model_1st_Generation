@@ -82,7 +82,7 @@ if __name__ == __main__:
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     from data.loader import load_multiple
-    from strategy.cointegration import casf_test
+    from strategy.cointegration import cadf_test
     from strategy.signals import calc_zscore, generate_signals
     import pandas as pd
 
@@ -92,7 +92,7 @@ if __name__ == __main__:
     gld = gld[gld.index >= gld.index.max() - pd.Offset(months=9)]
     gdx = gdx[gdx.index >= gdx.index.max() - pd.Offset(months=9)]
 
-    cadf_result = casf_test(gld, gdx)
+    cadf_result = cadf_test(gld, gdx)
     spread = cadf_result['spread']
     hedge_ratio = cadf_result['hedge_ratio']
 
