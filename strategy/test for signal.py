@@ -85,7 +85,9 @@ def generate_signals(zscore: pd.Series,
                 (zscore.abs() >= -entry_zscore), 
                 'signal'] = None
 
-    signals.
+    signals['signal'] = signals['signal'].ffill().fillna(0.0)
+
+    return signals
 
 # ============================================================
 # 直接執行此檔案時的測試用範例
