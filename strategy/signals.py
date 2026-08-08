@@ -95,28 +95,31 @@ def generate_signals(zscore: pd.Series,
 # 直接執行此檔案時的測試用範例
 # ============================================================
 if __name__ == "__main__":
+    # 載入資料
     import sys
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
 
-    # 載入資料
-    data = load_multiple(["GLD", "GDX"])
-    gld = data["GLD"]["Close"]
-    gdx = data["GDX"]["Close"]
-
     # 以全部資料長度 T 為 in-sample，取得固定 hedge ratio 與 residuals
     # 實際使用時，in-sample 應為回測起始日往回推 T 天，out-of-sample 才是回測區間
-    coint_result = cadf_test(gld, gdx)
-    lookback = int(coint_result["half_life"])
 
+    data = load_multiple(['GLD', 'GDX'])
+
+    gld = data['GLD']['Close']
+    gdx = data['GDX']['Close']
+
+    gld =  gld[gld.index >= gld.index.max() - pd.DateOffset(months=9)]
+    gdx =  gdx[gdx.index >= gdx.index.max() - pd.DateOffset(months=9)]
+    
     # spread 直接取 cadf_test 的 OLS 殘差（均值為 0）
-    spread = coint_result["spread"]
+    cadf_result = cadf_test(gld, gdx)
+    spread = cadf_result['spread']
+    lookback = cadf_result['half_life']
 
     # 計算 Z-score 與信號
-    zscore = calc_zscore(spread, lookback)
+    zscore = calc_zscore(spread, int(lookback))
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
-    print(f"\n信號（最後十筆）：")
-    print(signals.head(30))
+    print(signals.head(50))
