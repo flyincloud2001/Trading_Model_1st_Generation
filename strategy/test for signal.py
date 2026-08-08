@@ -74,7 +74,12 @@ def generate_signals(zscore: pd.Series,
     signals['zscore'] = zscore
     signals['signal'] = 0.0
 
+    signals.loc[zscore > entry_zscore, 'signal'] = -1
+    signals.loc[zscore < -entry_zscore, 'signal'] = 1
+
     # 出場信號：spread 回歸均值，平倉
+    signals.loc[zscore.abs() < exit_zscore] = 0
+    
     
     # 介於進出場閾值之間的時間點設為 NaN，再用前值填充（維持倉位）
 
