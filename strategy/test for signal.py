@@ -34,6 +34,7 @@ def calc_zscore(spread: pd.Series,
                  前 lookback-1 天為 NaN（rolling std 資料不足）
     """
     # 只用 rolling std，不減 rolling mean（OLS 殘差均值為 0）
+     
     zscore = 
 
 def generate_signals(zscore: pd.Series,
