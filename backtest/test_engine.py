@@ -70,3 +70,19 @@ def run_backtest(series_y: pd.Series,
     df['pnl_cumulative'] = (1 + df['pnl_daily']).cumprod() - 1
 
     result = df[['signal', 'pnl_daily', 'pnl_cumulative', 'cost']]
+
+    return result
+
+if __main__ == __file__:
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__, "..")))
+    from data.loader import load_multiple
+    from strategy.cointegration import casf_test
+    import pandas as pd
+
+    data = load_multiple(['GLD', 'GDX'])
+    gld, gdx = data[['GLD', 'GDX']]
+
+    gld = gld[gld.index >= gld.index.max() - pd.Offset(months=9)]
+    gdx = gdx[gdx.index >= gdx.index.max()]
