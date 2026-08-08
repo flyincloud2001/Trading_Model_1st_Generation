@@ -96,7 +96,7 @@ if __name__ == "__main__":
     # 載入資料
     import sys
     import os
-    sys.path.append(os.path.join(os.path.dirname(__file__, "..")))
+    sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
 
