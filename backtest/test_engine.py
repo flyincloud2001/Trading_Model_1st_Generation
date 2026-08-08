@@ -85,4 +85,8 @@ if __main__ == __file__:
     gld, gdx = data[['GLD', 'GDX']]
 
     gld = gld[gld.index >= gld.index.max() - pd.Offset(months=9)]
-    gdx = gdx[gdx.index >= gdx.index.max()]
+    gdx = gdx[gdx.index >= gdx.index.max() - pd.Offset(months=9)]
+
+    cadf_result = casf_test(gld, gdx)
+    look_back = cadf_result['half_life']
+    
