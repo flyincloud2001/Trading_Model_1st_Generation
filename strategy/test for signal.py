@@ -70,9 +70,12 @@ def generate_signals(zscore: pd.Series,
                   2010-02-10   -2.34     1.0   ← Z < -2.0，做多 spread
     """
     # 進場信號：spread 偏高做空，偏低做多
+    signals = pd.DataFrame(index=zscore.index)
+    signals['zscore'] = zscore
+    signals['signal'] = 0.0
 
     # 出場信號：spread 回歸均值，平倉
-
+    
     # 介於進出場閾值之間的時間點設為 NaN，再用前值填充（維持倉位）
 
 
