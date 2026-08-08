@@ -111,9 +111,10 @@ if __name__ == "__main__":
     # spread 直接取 cadf_test 的 OLS 殘差（均值為 0）
     cadf_result = cadf_test(gld, gdx)
     spread = cadf_result['spread']
+    lookback = cadf_result['half_life']
 
     # 計算 Z-score 與信號
-    zscore = calc_zscore(spread)
+    zscore = calc_zscore(spread, int(lookback))
     signals = generate_signals(zscore)
 
     print(signals)
