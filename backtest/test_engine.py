@@ -92,5 +92,5 @@ if __main__ == __file__:
     look_back = cadf_result['half_life']
     spread = cadf_result['spread']
 
-    zscore = calc_zscore(gld, gdx, spread)
+    zscore = calc_zscore(spread)
     signals = generate_signals()
