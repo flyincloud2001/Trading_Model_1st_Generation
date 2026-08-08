@@ -22,24 +22,24 @@
 每個模組的詳細說明請參考各自資料夾內的 README.md。
 
 ## Files Dependency
-data/loader.py
-    ↓
-strategy/cointegration.py  →  半衰期、CADF 檢定
-    ↓
-strategy/hedge_ratio.py    →  動態 hedge ratio、spread
-    ↓
-strategy/signals.py        →  Z-score、進出場信號
-    ↓
-backtest/engine.py         →  每日損益、累積報酬
-    ↓
-backtest/metrics.py        →  Sharpe、APR、最大回撤
-    ↓
-risk/kelly.py              →  單策略 Kelly 槓桿
-portfolio/allocator.py     →  多策略 Kelly 資本配置
-    ↓
-monitor/account.py         →  IBKR 持倉與帳戶淨值
-monitor/tracker.py         →  即時 P&L、Z-score 警示、log
-    ↓
-execution/order.py         →  送出兩條腿訂單、取消訂單
-    ↓
-feedback/evaluator.py      →  P&L 比較、共整合重新檢定、週報告
+data/loader.py  
+    ↓  
+strategy/cointegration.py  →  半衰期、CADF 檢定  
+    ↓  
+strategy/hedge_ratio.py    →  動態 hedge ratio、spread  
+    ↓  
+strategy/signals.py        →  Z-score、進出場信號  
+    ↓  
+backtest/engine.py         →  每日損益、累積報酬  
+    ↓  
+backtest/metrics.py        →  Sharpe、APR、最大回撤  
+    ↓  
+risk/kelly.py              →  單策略 Kelly 槓桿  
+portfolio/allocator.py     →  多策略 Kelly 資本配置  
+    ↓  
+monitor/account.py         →  IBKR 持倉與帳戶淨值  
+monitor/tracker.py         →  即時 P&L、Z-score 警示、log  
+    ↓  
+execution/order.py         →  送出兩條腿訂單、取消訂單  
+    ↓  
+feedback/evaluator.py      →  P&L 比較、共整合重新檢定、週報告  
