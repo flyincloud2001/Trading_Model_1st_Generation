@@ -94,7 +94,9 @@ def generate_signals(zscore: pd.Series,
 # ============================================================
 if __name__ == "__main__":
     # 載入資料
-
+    import sys
+    import os
+    sys.path.append()
     # 以全部資料長度 T 為 in-sample，取得固定 hedge ratio 與 residuals
     # 實際使用時，in-sample 應為回測起始日往回推 T 天，out-of-sample 才是回測區間
 
