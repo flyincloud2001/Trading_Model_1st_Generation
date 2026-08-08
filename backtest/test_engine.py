@@ -77,7 +77,7 @@ def run_backtest(series_y: pd.Series,
 
     return results
 
-if __main__ == __file__:
+if __name__ == __main__:
     import sys
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__, "..")))
