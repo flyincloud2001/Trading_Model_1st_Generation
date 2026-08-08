@@ -40,8 +40,9 @@ def run_backtest(series_y: pd.Series,
                   2010-02-09     0.0     -0.0008             0.0030  0.0010
     """
     # 對齊所有序列的日期
-    df = pd.DataFrame[['price_y', 'price_x', signals['signal']]]
-    df['p']
+    df = pd.DataFrame['price_y': series_y,
+                        'price_x', signals['signal']]]
+
     # 計算每日報酬率
     df['return_y'] = df['price_y'].pct_change()
     # 計算倉位變化（用來判斷是否有交易發生）
