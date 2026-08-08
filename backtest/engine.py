@@ -78,4 +78,3 @@ def run_backtest(series_y: pd.Series,
 
     return results
 
-x (1+r%)*x
