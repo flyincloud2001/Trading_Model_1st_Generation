@@ -90,8 +90,8 @@ if __name__ == "__main__":
     gld = data['GLD']['Close']
     gdx = data['GDX']['Close']
 
-    gld = gld[gld.index >= gld.index.max() - pd.Dateoffset(months=9)]
-    gdx = gdx[gdx.index >= gdx.index.max() - pd.Dateoffset(months=9)]
+    gld = gld[gld.index >= gld.index.max() - pd.DateOffset(months=9)]
+    gdx = gdx[gdx.index >= gdx.index.max() - pd.DateOffset(months=9)]
 
     cadf_result = cadf_test(gld, gdx)
     spread = cadf_result['spread']
