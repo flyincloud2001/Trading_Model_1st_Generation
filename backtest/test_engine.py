@@ -53,7 +53,7 @@ def run_backtest(series_y: pd.Series,
 
     # 計算倉位變化（用來判斷是否有交易發生）
     df['signal_prev'] = df['signal'].shift(1).fillna(0.0)
-    df['position_changes'] = (df['signal'] != df['signal_prev']).astype(float)
+    df['position_change'] = (df['signal'] != df['signal_prev']).astype(float)
 
     # 計算每日策略損益（用前一天的信號乘以今天的報酬）
     # signal = +1：做多 Y，做空 X
