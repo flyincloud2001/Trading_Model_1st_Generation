@@ -71,9 +71,11 @@ def run_backtest(series_y: pd.Series,
     # 累積報酬
     df['pnl_cumulative'] = (1 + df['pnl_daily']).cumprod() - 1
 
-    result = df[['signal', 'pnl_daily', 'pnl_cumulative', 'cost']]
+    results = df[[
+        'signal', 'pnl_daily', 'pnl_cumulative', 'cost'
+    ]].copy()
 
-    return result
+    return results
 
 if __main__ == __file__:
     import sys
