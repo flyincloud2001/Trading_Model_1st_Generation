@@ -95,4 +95,6 @@ if __main__ == __file__:
     zscore = calc_zscore(spread)
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
-    backtest_result = run_backtest(gld, gdx, hedge_ratio, )
+    backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
+
+    print(backtest_result.tail(10))
