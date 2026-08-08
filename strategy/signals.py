@@ -122,4 +122,4 @@ if __name__ == "__main__":
     zscore = calc_zscore(spread, int(lookback))
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
-    print(signals.head(50))
+    print(signals.head(100))
