@@ -87,7 +87,8 @@ if __name__ == __main__:
     import pandas as pd
 
     data = load_multiple(['GLD', 'GDX'])
-    gld, gdx = data[['GLD', 'GDX']]
+    gld = data['GLD']['Close']
+    gdx = data['GDX']['Close']
 
     gld = gld[gld.index >= gld.index.max() - pd.Offset(months=9)]
     gdx = gdx[gdx.index >= gdx.index.max() - pd.Offset(months=9)]
