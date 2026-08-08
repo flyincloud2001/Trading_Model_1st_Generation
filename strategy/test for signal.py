@@ -81,8 +81,11 @@ def generate_signals(zscore: pd.Series,
     signals.loc[zscore.abs() < exit_zscore] = 0
     
     # 介於進出場閾值之間的時間點設為 NaN，再用前值填充（維持倉位）
-    signals.loc[(zscore<entry_zscore) &
-                ()]
+    signals.loc[(zscore.abs() <= entry_zscore) &
+                (zscore.abs() >= -entry_zscore), 
+                'signal'] = None
+
+    signals.
 
 # ============================================================
 # 直接執行此檔案時的測試用範例
