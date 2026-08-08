@@ -79,7 +79,7 @@ if __main__ == __file__:
     sys.path.append(os.path.join(os.path.dirname(__file__, "..")))
     from data.loader import load_multiple
     from strategy.cointegration import casf_test
-    from strategy.signals import generate_signals
+    from strategy.signals import calc_zscore, generate_signals
     import pandas as pd
 
     data = load_multiple(['GLD', 'GDX'])
@@ -92,4 +92,5 @@ if __main__ == __file__:
     look_back = cadf_result['half_life']
     spread = cadf_result['spread']
 
+    zscore = calc_zscore(gld, gdx, spread)
     signals = generate_signals()
