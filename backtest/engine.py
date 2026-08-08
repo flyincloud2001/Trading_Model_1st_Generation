@@ -44,7 +44,6 @@ def run_backtest(series_y: pd.Series,
     df = pd.DataFrame({
         "price_y": series_y,
         "price_x": series_x,
-        "hedge_ratio": hedge_ratio,
         "signal": signals["signal"]
     }).dropna()
 
