@@ -103,4 +103,8 @@ if __name__ == "__main__":
 
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
 
+    holding_days = (backtest_result['signal'] != 0).sum()
+total_days = len(results)
+print(f"持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
+
     print(backtest_result.tail(10))
