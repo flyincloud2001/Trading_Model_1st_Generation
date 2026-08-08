@@ -94,3 +94,5 @@ if __main__ == __file__:
 
     zscore = calc_zscore(spread)
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
+
+    
