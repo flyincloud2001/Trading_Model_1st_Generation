@@ -60,7 +60,7 @@ def run_backtest(series_y: pd.Series,
     # signal = +1：做多 Y，做空 X
     # signal = -1：做空 Y，做多 X
     df["pnl_y"] = df["signal_prev"] * df["return_y"]
-    df["pnl_x"] = -df["signal_prev"] * df["hedge_ratio"] * df["return_x"]
+    df["pnl_x"] = -df["signal_prev"] * hedge_ratio * df["return_x"]
     df["gross_pnl"] = (df["pnl_y"] + df["pnl_x"]) / 2  # 除以 2 因為有兩條腿
 
     # 計算交易成本（每次倉位改變時收取）
