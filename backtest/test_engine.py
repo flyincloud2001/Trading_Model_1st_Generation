@@ -63,7 +63,7 @@ def run_backtest(series_y: pd.Series,
     df['pnl_gross'] = (df['pnl_y'] + df['pnl_x']) / 2
     
     # 計算交易成本（每次倉位改變時收取）
-    df['cost'] = df['position_changes']* transaction_cost* 2
+    df['cost'] = df['position_change'] * transaction_cost * 2
 
     # 每日淨損益
     df['pnl_daily'] = df['pnl_gross'] - df['cost']
