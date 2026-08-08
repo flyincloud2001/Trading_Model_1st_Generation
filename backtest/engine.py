@@ -1,9 +1,8 @@
 # engine.py
 # 負責執行配對交易的回測邏輯
 # 根據 signals.py 生成的信號，計算每日損益與持倉
-
 import pandas as pd
-import numpy as np
+
 
 
 def run_backtest(series_y: pd.Series,
@@ -42,39 +41,66 @@ def run_backtest(series_y: pd.Series,
     """
     # 對齊所有序列的日期
     df = pd.DataFrame({
-        "price_y": series_y,
-        "price_x": series_x,
-        "signal": signals["signal"]
+        'price_y': series_y,
+        'price_x': series_x,
+        'signal': signals['signal']
     }).dropna()
 
     # 計算每日報酬率
-    df["return_y"] = df["price_y"].pct_change()
-    df["return_x"] = df["price_x"].pct_change()
+    df['return_y'] = df['price_y'].pct_change()
+    df['return_x'] = df['price_x'].pct_change()
     df.dropna(inplace=True)
-    
+
     # 計算倉位變化（用來判斷是否有交易發生）
-    df["signal_prev"] = df["signal"].shift(1).fillna(0.0)
-    df["position_change"] = (df["signal"] != df["signal_prev"]).astype(float)
+    df['signal_prev'] = df['signal'].shift(1).fillna(0.0)
+    df['position_change'] = (df['signal'] != df['signal_prev']).astype(float)
 
     # 計算每日策略損益（用前一天的信號乘以今天的報酬）
     # signal = +1：做多 Y，做空 X
     # signal = -1：做空 Y，做多 X
-    df["pnl_y"] = df["signal_prev"] * df["return_y"]
-    df["pnl_x"] = -df["signal_prev"] * hedge_ratio * df["return_x"]
-    df["gross_pnl"] = (df["pnl_y"] + df["pnl_x"]) / 2  # 除以 2 因為有兩條腿
-
+    df['pnl_y'] = df['signal_prev'] * df['return_y']
+    df['pnl_x'] = -df['signal_prev'] * hedge_ratio* df['return_x']
+    df['pnl_gross'] = (df['pnl_y'] + df['pnl_x']) / 2
+    
     # 計算交易成本（每次倉位改變時收取）
-    df["cost"] = df["position_change"] * transaction_cost * 2
+    df['cost'] = df['position_change'] * transaction_cost * 2
 
     # 每日淨損益
-    df["daily_pnl"] = df["gross_pnl"] - df["cost"]
+    df['pnl_daily'] = df['pnl_gross'] - df['cost']
 
     # 累積報酬
-    df["cumulative_return"] = (1 + df["daily_pnl"]).cumprod() - 1
+    df['pnl_cumulative'] = (1 + df['pnl_daily']).cumprod() - 1
 
     results = df[[
-        "signal", "daily_pnl", "cumulative_return", "cost"
+        'signal', 'pnl_daily', 'pnl_cumulative', 'cost'
     ]].copy()
 
     return results
 
+if __name__ == "__main__":
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+    from data.loader import load_multiple
+    from strategy.cointegration import cadf_test
+    from strategy.signals import calc_zscore, generate_signals
+    import pandas as pd
+
+    data = load_multiple(['GLD', 'GDX'])
+    gld = data['GLD']['Close']
+    gdx = data['GDX']['Close']
+
+    gld = gld[gld.index >= gld.index.max() - pd.DateOffset(months=9)]
+    gdx = gdx[gdx.index >= gdx.index.max() - pd.DateOffset(months=9)]
+
+    cadf_result = cadf_test(gld, gdx)
+    spread = cadf_result['spread']
+    hedge_ratio = cadf_result['hedge_ratio']
+    lookback = cadf_result['half_life']
+
+    zscore = calc_zscore(spread, int(lookback))
+    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
+
+    backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
+
+    print(backtest_result.tail(10))
