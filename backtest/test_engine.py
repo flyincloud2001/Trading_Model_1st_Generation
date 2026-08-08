@@ -89,10 +89,10 @@ if __main__ == __file__:
     gdx = gdx[gdx.index >= gdx.index.max() - pd.Offset(months=9)]
 
     cadf_result = casf_test(gld, gdx)
-    look_back = cadf_result['half_life']
     spread = cadf_result['spread']
+    hedge_ratio = cadf_result['hedge_ratio']
 
     zscore = calc_zscore(spread)
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
-    
+    backtest_result = run_backtest(gld, gdx, hedge_ratio, )
