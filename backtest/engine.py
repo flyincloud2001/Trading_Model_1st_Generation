@@ -26,7 +26,7 @@ def run_backtest(series_y: pd.Series,
     參數：
         series_y         : 因變數價格序列（例如 GLD 收盤價）
         series_x         : 自變數價格序列（例如 GDX 收盤價）
-        hedge_ratios     : 每日動態 hedge ratio 序列
+        hedge_ratio      : 固定 hedge ratio（純量）
         signals          : 包含 signal 欄位的 DataFrame（來自 signals.py）
         transaction_cost : 單邊交易成本比例，預設 0.001（10 bps）
                            例如 0.001 代表買入 $10,000 的 GLD 需付 $10 手續費
