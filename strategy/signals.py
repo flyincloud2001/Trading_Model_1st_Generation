@@ -41,7 +41,7 @@ def calc_zscore(spread: pd.Series,
 
 def generate_signals(zscore: pd.Series,
                      entry_zscore: float = 2.0,
-                     exit_zscore: float = 0.3) -> pd.DataFrame:
+                     exit_zscore: float = 0.0) -> pd.DataFrame:
     """
     根據 Z-score 生成 Bollinger Bands 進出場信號。
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
     # 計算 Z-score 與信號
     zscore = calc_zscore(spread, lookback)
-    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.0)
+    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
     print(f"\n信號（最後十筆）：")
     print(signals.tail(10))
