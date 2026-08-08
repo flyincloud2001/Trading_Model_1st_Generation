@@ -89,4 +89,6 @@ if __main__ == __file__:
 
     cadf_result = casf_test(gld, gdx)
     look_back = cadf_result['half_life']
+    spread = cadf_result['spread']
+
     
