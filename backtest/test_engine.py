@@ -47,7 +47,7 @@ def run_backtest(series_y: pd.Series,
     # 計算每日報酬率
     df['return_y'] = df['price_y'].pct_change()
     df['return_x'] = df['price_x'].pct_change()
-    df.drop(inplace=True)
+    df.dropna(inplace=True)
 
     # 計算倉位變化（用來判斷是否有交易發生）
     df['signal_prev'] = df['signal'].shift(1).fillna(0.0)
