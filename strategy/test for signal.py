@@ -97,9 +97,18 @@ if __name__ == "__main__":
     import sys
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__, "..")))
+    from data.loader import load_multiple
+    from strategy.cointegration import casf_test
+
     # 以全部資料長度 T 為 in-sample，取得固定 hedge ratio 與 residuals
     # 實際使用時，in-sample 應為回測起始日往回推 T 天，out-of-sample 才是回測區間
 
-    # spread 直接取 cadf_test 的 OLS 殘差（均值為 0）
+    data = load_multiple(['GLD', 'GDX'])
+    gld
 
+    # spread 直接取 cadf_test 的 OLS 殘差（均值為 0）
+    csdf_result = casd_test(gld, gdx)
+    spread = cadf_result['spread']
+    zscore = calc_zscore(spread)
+    
     # 計算 Z-score 與信號
