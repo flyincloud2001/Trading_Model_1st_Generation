@@ -119,4 +119,4 @@ if __name__ == "__main__":
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
     print(f"\n信號（最後十筆）：")
-    print(signals.tail(10))
+    print(signals.head(30))
