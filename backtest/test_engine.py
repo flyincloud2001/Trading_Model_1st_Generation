@@ -57,9 +57,16 @@ def run_backtest(series_y: pd.Series,
     # signal = +1：做多 Y，做空 X
     # signal = -1：做空 Y，做多 X
     df['pnl_y'] = df['signal']* df['return_y']
-    df['pnl_x'] = -df['signal']* 
+    df['pnl_x'] = -df['signal']* hedge_ratio* df['return_x']
+    df['pnl_gross'] = (df['pnl_y'] + df['pnl_x']) / 2
+    
     # 計算交易成本（每次倉位改變時收取）
+    df['cost'] = df['position_changes']* transaction_cost* 2
 
     # 每日淨損益
+    df['pnl_daily'] = df['pnl_gross'] - df['cost']
 
     # 累積報酬
+    df['pnl_cumulative'] = (1 + df['pnl_daily']).cumprod() - 1
+
+    result = df[['signal', 'pnl_daily', 'pnl_cumulative', 'cost']]
