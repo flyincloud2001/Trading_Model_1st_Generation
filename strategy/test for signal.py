@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
     gld =  gld[gld.index >= gld.index.max() - pd.DateOffset(months=9)]
     gdx =  gdx[gdx.index >= gdx.index.max() - pd.DateOffset(months=9)]
-
+    
     # spread 直接取 cadf_test 的 OLS 殘差（均值為 0）
     cadf_result = cadf_test(gld, gdx)
     spread = cadf_result['spread']
