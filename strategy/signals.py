@@ -52,7 +52,7 @@ def generate_signals(zscore: pd.Series,
         其他時間           → 維持前一個倉位（ffill）
 
     參數：
-        zscore       : Z-score 序列（來自 calc_zs   core）
+        zscore       : Z-score 序列（來自 calc_zscore）
         entry_zscore : 進場閾值，預設 2.0
         exit_zscore  : 出場閾值，預設 0.0
                        注意：預設 0.0 代表平倉條件永遠不成立，
