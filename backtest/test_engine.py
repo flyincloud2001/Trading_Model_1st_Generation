@@ -93,4 +93,4 @@ if __main__ == __file__:
     spread = cadf_result['spread']
 
     zscore = calc_zscore(spread)
-    signals = generate_signals()
+    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
