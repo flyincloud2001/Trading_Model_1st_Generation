@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
-    ax.plot(spread, label='Residuals')
+    ax.plot(spread, label='Residuals', color='steelblue')
     ax_ = ax.twinx()
     ax_.plot(spread, label='potition')
     ax.legend()
