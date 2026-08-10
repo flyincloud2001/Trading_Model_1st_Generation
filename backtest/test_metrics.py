@@ -76,8 +76,11 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
             drawdown_period = 0
 
     result = {
-        'max_
+        'max_drawdown': max_drawdown,
+        'max_drawdown_period': max_drawdown_period
     }
+
+    return result
 
 def calc_apr(cumulative_return: pd.Series,
              periods_per_year: int = 252) -> float:
@@ -94,7 +97,7 @@ def calc_apr(cumulative_return: pd.Series,
               例如：0.124，代表年化報酬 12.4%
               注意：若回測期間不足一年，此數字可能極端，需謹慎解讀
     """
-
+    
 
 def summarize(results: pd.DataFrame,
               train_ratio: float = 0.5,
