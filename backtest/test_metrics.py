@@ -71,7 +71,13 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     for drawdown in drawdown:
         if drawdown < 0:
             drawdown_period += 1
-            max_drawdown_period =  
+            max_drawdown_period = np.max(drawdown_period, max_drawdown_period) 
+        else:
+            drawdown_period = 0
+
+    result = {
+        'max_
+    }
 
 def calc_apr(cumulative_return: pd.Series,
              periods_per_year: int = 252) -> float:
