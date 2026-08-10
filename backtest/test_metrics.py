@@ -145,7 +145,7 @@ def summarize(results: pd.DataFrame,
         pnl_cumulative = (1 + pnl_daily).cumprod()
 
         metric = {
-            'sharp_ratio': calc_sharpe(pnl_daily),
+            'sharp_ratio': calc_sharpe(pnl_daily, periods_per_year),
             'apr': calc_apr(pnl_daily),
             'max_drawdown': calc_max_drawdown(pnl_daily)['max_drawdown'],
             'max_drawdown_duration': calc_max_drawdown(pnl_daily)
