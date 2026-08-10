@@ -145,7 +145,8 @@ def summarize(results: pd.DataFrame,
         pnl_cumulative = (1 + pnl_daily).cumprod()
 
         metric = {
-            'sharp_ratio': calc_sharp
+            'sharp_ratio': calc_sharpe(pnl_daily),
+            ''
         }
     # 印出摘要
 
