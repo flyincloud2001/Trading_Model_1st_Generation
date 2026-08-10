@@ -22,6 +22,10 @@ def calc_sharpe(pnl_daily: pd.Series,
                  例如：1.87，代表每承受一單位風險可獲得 1.87 單位報酬
     """
     std_daily = pnl_daily.std()
+
+    if std_daily == 0:
+        return 0.0
+    
     std_annual = np.sqrt(periods_per_year) * pnl_daily / std_daily
 
     return std_annual
@@ -51,7 +55,7 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
                  }
     """
     # 計算高水位（High Watermark）
-
+    high_watermark
     # 計算每日回撤
 
     # 最大回撤
