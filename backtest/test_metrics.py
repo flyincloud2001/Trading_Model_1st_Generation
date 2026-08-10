@@ -185,4 +185,9 @@ if __name__ == "__main__":
     gld = data['GLD']['Close']
     gdx = data['GDX']['Close']
 
-    gld_in_sample = gld[gld.index >= gld.index.max() pd.DateOffset(months=9)]
+    gld_in_sample = gld[gld.index >= gld.index.max() - pd.DateOffset(months=9)]
+    gdx_in_sample = gdx[gdx.index >= gdx.index.max() - pd.DateOffset(months=9)]
+
+    gld_in_sample, gdx_in_sample = gld_in_sample.align(gdx_in_sample, join='inner')
+
+    
