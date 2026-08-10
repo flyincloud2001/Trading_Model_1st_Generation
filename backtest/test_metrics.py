@@ -173,7 +173,7 @@ def summarize(results: pd.DataFrame,
 if __name__ == "__main__":
     import sys
     import os
-    sys.path.append(os.path.join(os.path.join(__file__), ".."))
+    sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     import pandas as pd
     import numpy as np
     from data.loader import load_multiple
