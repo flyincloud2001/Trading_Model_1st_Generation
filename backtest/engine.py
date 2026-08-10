@@ -98,7 +98,7 @@ if __name__ == "__main__":
     hedge_ratio = cadf_result['hedge_ratio']
     lookback = cadf_result['half_life']
 
-    zscore, std = calc_zscore(spread, 20)
+    zscore = calc_zscore(spread, 20)
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
 
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     std = spread.rolling(window=lookback).std()
     print(f'std = {std}')
-    
+
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
     print(f"持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
