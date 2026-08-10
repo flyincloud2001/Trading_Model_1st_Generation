@@ -195,5 +195,6 @@ if __name__ == "__main__":
     hedge_ratio = cadf_result['hedge_ratio']
     spread = cadf_result['spread']
 
-    backtest_result = run_backtest()
+    
+    backtest_result = run_backtest(gld_in_sample, gdx_in_sample, hedge_ratio, signals)
     summary = summarize()
