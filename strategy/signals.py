@@ -1,4 +1,4 @@
-ㄊ# signals.py
+# signals.py
 # 負責計算 Z-score 並生成 Bollinger Bands 進出場信號
 # 進場條件：|Z-score| > entryZscore
 # 出場條件：|Z-score| < exitZscore
