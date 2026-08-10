@@ -99,14 +99,11 @@ if __name__ == "__main__":
     lookback = cadf_result['half_life']
 
     zscore = calc_zscore(spread, 100)
-    signals = generate_signals(zscore, entry_zscore=1.0, exit_zscore=0.3)
+    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
     
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
 
     print(backtest_result.tail(10))
-
-    std = spread.rolling(window=100).std().mean()
-    print(f'std = {std}')
 
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
