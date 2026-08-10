@@ -90,7 +90,57 @@ def generate_signals(zscore: pd.Series,
 
     return signals
 
+def generate_signals_absolute(spread: pd.Series,
+                     entry_threshold: float,
+                     exit_threshold: float = 0.0) -> pd.DataFrame:
+    """
+    根據 spread 絕對值生成進出場信號。
 
+    信號邏輯：
+        spread > +entry_threshold  → spread 偏高 → 做空 Y，做多 X（signal = -1）
+        spread < -entry_threshold  → spread 偏低 → 做多 Y，做空 X（signal = +1）
+        |spread| < exit_threshold  → 回歸均值 → 平倉（signal = 0）
+        其他時間                   → 維持前一個倉位（ffill）
+
+    參數：
+        spread          : spread 時間序列（來自 cadf_test 的 OLS 殘差）
+        entry_threshold : 進場閾值（spread 絕對值），需依資產對手動設定
+                          例如 GLD/GDX 的 spread 若以殘差計算，可設為 5.0
+        exit_threshold  : 出場閾值（spread 絕對值），預設 0.0
+                          預設 0.0 代表平倉條件永遠不成立，
+                          實際出場靠 spread 穿越對面閾值觸發反向信號
+
+    回傳：
+        signals : 包含 spread 與 signal 的 DataFrame
+                  例如（entry_threshold=5.0, exit_threshold=0.0）：
+                              spread  signal
+                  Date
+                  2010-02-05    3.10     0.0   ← 介於閾值之間，ffill 前值（初始為 0）
+                  2010-02-08   -2.30     0.0   ← 同上
+                  2010-02-09    6.50    -1.0   ← spread > +5.0，做空 spread
+                  2010-02-10   -5.80     1.0   ← spread < -5.0，做多 spread
+    """
+    signals = pd.DataFrame(index=spread.index)
+    signals["spread"] = spread
+    signals["signal"] = 0.0
+
+    # 進場信號：spread 偏高做空，偏低做多
+    signals.loc[spread > entry_threshold, "signal"] = -1.0
+    signals.loc[spread < -entry_threshold, "signal"] = 1.0
+
+    # 出場信號：spread 回歸均值，平倉
+    signals.loc[spread.abs() < exit_threshold, "signal"] = 0.0
+
+    # 介於進出場閾值之間的時間點設為 NaN，再用前值填充（維持倉位）
+    signals.loc[
+        (spread.abs() <= entry_threshold) &
+        (spread.abs() >= exit_threshold),
+        "signal"
+    ] = None
+
+    signals["signal"] = signals["signal"].ffill().fillna(0.0)
+
+    return signals
 # ============================================================
 # 直接執行此檔案時的測試用範例
 # ============================================================
