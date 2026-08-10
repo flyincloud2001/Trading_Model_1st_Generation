@@ -55,8 +55,10 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
                  }
     """
     # 計算高水位（High Watermark）
-    high_watermark
+    high_watermark = cumulative_return.cummax()
+
     # 計算每日回撤
+    
 
     # 最大回撤
 
