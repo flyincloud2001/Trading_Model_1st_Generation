@@ -160,7 +160,7 @@ def summarize(results: pd.DataFrame,
     }
 
     for split_name, metric in summary.items():
-        print(f'')
+        print('\n 訓練集') if 'train' == split_name else print('\n測試集')
         print(f'夏普比率: {metric['sharpe_ratio']}')
         print(f'年化率: {metric['apr']}')
         print(f'最大回撤: {metric['max_drawdown']}')
@@ -171,3 +171,10 @@ def summarize(results: pd.DataFrame,
 # 直接執行此檔案時的測試用範例
 # ============================================================
 if __name__ == "__main__":
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.join(__file__), ".."))
+    import pandas as pd
+    import numpy as np
+    from data.loader import load_multiple
+    from strategy.
