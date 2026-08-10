@@ -161,7 +161,11 @@ def summarize(results: pd.DataFrame,
 
     for split_name, metric in summary.items():
         print(f'夏普比率: {metric['sharpe_ratio']}')
-        print(f'年化率')
+        print(f'年化率: {metric['apr']}')
+        print(f'最大回撤: {metric['max_drawdown']}')
+        print(f'最大回撤時間: {metric['max_drawdown_duration']}')
+
+    return summary
 # ============================================================
 # 直接執行此檔案時的測試用範例
 # ============================================================
