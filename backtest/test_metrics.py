@@ -185,4 +185,4 @@ if __name__ == "__main__":
     gld = data['GLD']['Close']
     gdx = data['GDX']['Close']
 
-    gld
+    gld_in_sample = gld[gld.index >= gld.index.max() pd.DateOffset(months=9)]
