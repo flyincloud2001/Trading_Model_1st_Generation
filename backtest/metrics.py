@@ -173,7 +173,6 @@ if __name__ == "__main__":
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
-    from strategy.hedge_ratio import calc_rolling_hedge_ratio, calc_spread
     from strategy.signals import calc_zscore, generate_signals
     from backtest.engine import run_backtest
 

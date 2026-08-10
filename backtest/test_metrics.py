@@ -178,4 +178,5 @@ if __name__ == "__main__":
     import numpy as np
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
-    from strategy.
+    from strategy.signals import generate_signals
+    
