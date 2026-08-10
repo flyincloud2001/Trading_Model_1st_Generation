@@ -65,7 +65,13 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     max_drawdown = drawdown.max() - 1
 
     # 計算回撤期間
-    
+    drawdown_period = 0
+    max_drawdown_period = 0
+
+    for drawdown in drawdown:
+        if drawdown < 0:
+            drawdown_period += 1
+            max_drawdown_period =  
 
 def calc_apr(cumulative_return: pd.Series,
              periods_per_year: int = 252) -> float:
