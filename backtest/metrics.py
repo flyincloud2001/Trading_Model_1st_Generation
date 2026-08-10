@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 
-def calc_sharpe(daily_pnl: pd.Series,
+def calc_sharpe(pnl_daily: pd.Series,
                 periods_per_year: int = 252) -> float:
     """
     計算年化 Sharpe ratio。
@@ -21,11 +21,14 @@ def calc_sharpe(daily_pnl: pd.Series,
         sharpe : 年化 Sharpe ratio
                  例如：1.87，代表每承受一單位風險可獲得 1.87 單位報酬
     """
-    if daily_pnl.std() == 0:
-        return 0.0
-    sharpe = np.sqrt(periods_per_year) * daily_pnl.mean() / daily_pnl.std()
-    return round(sharpe, 4)
+    std_daily = pnl_daily.std()
 
+    if std_daily == 0:
+        return 0.0
+    
+    sharpe = np.sqrt(periods_per_year) * pnl_daily.mean() / std_daily
+
+    return round(sharpe, 2)
 
 def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     """
@@ -52,11 +55,11 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
                  }
     """
     # 計算高水位（High Watermark）
-    equity = 1 + cumulative_return
-    high_watermark = equity.cummax()
+    cumulative_return_ = 1 + cumulative_return
+    high_watermark = cumulative_return_.cummax()
 
     # 計算每日回撤
-    drawdown = (equity - high_watermark) / high_watermark
+    drawdown = (cumulative_return_ - high_watermark) / high_watermark
 
     # 最大回撤
     max_drawdown = drawdown.min()
@@ -64,19 +67,20 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     # 計算回撤期間
     drawdown_duration = 0
     max_drawdown_duration = 0
+
     for dd in drawdown:
         if dd < 0:
             drawdown_duration += 1
-            max_drawdown_duration = max(max_drawdown_duration, drawdown_duration)
+            max_drawdown_duration = max(drawdown_duration, max_drawdown_duration) 
         else:
             drawdown_duration = 0
 
     result = {
-        "max_drawdown": round(max_drawdown, 4),
-        "max_drawdown_duration": max_drawdown_duration
+        'max_drawdown': round(max_drawdown, 2), 
+        'max_drawdown_duration': max_drawdown_duration
     }
-    return result
 
+    return result
 
 def calc_apr(cumulative_return: pd.Series,
              periods_per_year: int = 252) -> float:
@@ -93,14 +97,17 @@ def calc_apr(cumulative_return: pd.Series,
               例如：0.124，代表年化報酬 12.4%
               注意：若回測期間不足一年，此數字可能極端，需謹慎解讀
     """
+
+
+    # apr = annualized percentage return
     n_periods = len(cumulative_return)
+
     if n_periods < periods_per_year:
         print("[metrics] 警告：回測期間不足一年，APR 數值僅供參考。")
+    
+    apr = (1 + cumulative_return.iloc[-1]) ** (periods_per_year / n_periods) - 1
 
-    total_return = cumulative_return.iloc[-1]
-    apr = (1 + total_return) ** (periods_per_year / n_periods) - 1
     return round(apr, 4)
-
 
 def summarize(results: pd.DataFrame,
               train_ratio: float = 0.5,
@@ -133,37 +140,39 @@ def summarize(results: pd.DataFrame,
                   }
     """
     # 分割訓練集與測試集
-    split_idx = int(len(results) * train_ratio)
-    train = results.iloc[:split_idx]
-    test = results.iloc[split_idx:]
+    split_ratio = int(len(results) * train_ratio)
+    result_train = results.iloc[:split_ratio]
+    result_test = results.iloc[split_ratio:]
 
     def _calc_metrics(df: pd.DataFrame) -> dict:
         # 重新計算測試集的累積報酬（從 0 開始）
-        cumret = (1 + df["daily_pnl"]).cumprod() - 1
-        dd = calc_max_drawdown(cumret)
-        return {
-            "sharpe": calc_sharpe(df["daily_pnl"], periods_per_year),
-            "apr": calc_apr(cumret, periods_per_year),
-            "max_drawdown": dd["max_drawdown"],
-            "max_drawdown_duration": dd["max_drawdown_duration"]
+        pnl_daily = df['pnl_daily']
+        pnl_cumulative = (1 + pnl_daily).cumprod() - 1
+        dd = calc_max_drawdown(pnl_cumulative)
+
+        metric = {
+            'sharpe_ratio': calc_sharpe(pnl_daily, periods_per_year),
+            'apr': calc_apr(pnl_cumulative, periods_per_year),
+            'max_drawdown': dd['max_drawdown'],
+            'max_drawdown_duration': dd['max_drawdown_duration']
         }
 
-    summary = {
-        "train": _calc_metrics(train),
-        "test": _calc_metrics(test)
-    }
+        return metric
 
     # 印出摘要
-    for split_name, metrics in summary.items():
-        print(f"\n[metrics] {'訓練集' if split_name == 'train' else '測試集'} 績效：")
-        print(f"  Sharpe Ratio         : {metrics['sharpe']}")
-        print(f"  年化報酬率 APR       : {metrics['apr']:.2%}")
-        print(f"  最大回撤             : {metrics['max_drawdown']:.2%}")
-        print(f"  最大回撤期間         : {metrics['max_drawdown_duration']} 天")
+    summary = {
+        'train': _calc_metrics(result_train),
+        'test': _calc_metrics(result_test)
+    }
+
+    for split_name, metric in summary.items():
+        print('\n訓練集') if 'train' == split_name else print('\n測試集')
+        print(f'夏普比率: {metric['sharpe_ratio']}')
+        print(f'年化率: {metric['apr']}')
+        print(f'最大回撤: {metric['max_drawdown']}')
+        print(f'最大回撤時間: {metric['max_drawdown_duration']}')
 
     return summary
-
-
 # ============================================================
 # 直接執行此檔案時的測試用範例
 # ============================================================
@@ -171,24 +180,33 @@ if __name__ == "__main__":
     import sys
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+    import pandas as pd
+    import numpy as np
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
-    from strategy.signals import calc_zscore, generate_signals
+    from strategy.signals import generate_signals, calc_zscore
     from backtest.engine import run_backtest
 
-    data = load_multiple(["GLD", "GDX"])
-    gld = data["GLD"]["Close"]
-    gdx = data["GDX"]["Close"]
+    data = load_multiple(['GLD', 'GDX'])
+    gld = data['GLD']['Close']
+    gdx = data['GDX']['Close']
 
-    coint_result = cadf_test(gld, gdx)
-    lookback = int(coint_result["half_life"])
+    gld_in_sample = gld[gld.index >= gld.index.max() - pd.DateOffset(months=9)]
+    gdx_in_sample = gdx[gdx.index >= gdx.index.max() - pd.DateOffset(months=9)]
 
-    # 以下這兩行已經不存在，因為hedge_ratio已被設為固定
-    hedge_ratios = calc_rolling_hedge_ratio(gld, gdx, lookback)
-    spread = calc_spread(gld, gdx, hedge_ratios)
+    gld_in_sample, gdx_in_sample = gld_in_sample.align(gdx_in_sample, join='inner')
 
+    cadf_result = cadf_test(gld_in_sample, gdx_in_sample)
+    half_life = cadf_result['half_life']
+    hedge_ratio = cadf_result['hedge_ratio']
+    spread = cadf_result['spread']
+
+    lookback = int(half_life)
     zscore = calc_zscore(spread, lookback)
-    signals = generate_signals(zscore)
+    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.4)
 
-    results = run_backtest(gld, gdx, hedge_ratios, signals)
-    summary = summarize(results)
+    # 目前backtest用的是in_sample的數據
+    # 但是summarize()的設計是需要輸入完整的數據(in_sample + our_sample)
+    # 這部分需要修改
+    backtest_result = run_backtest(gld_in_sample, gdx_in_sample, hedge_ratio, signals)
+    summary = summarize(backtest_result)
