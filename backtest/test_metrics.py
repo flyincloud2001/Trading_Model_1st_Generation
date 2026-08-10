@@ -2,7 +2,7 @@
 # 負責計算回測績效指標
 # 包含：Sharpe ratio、最大回撤、最大回撤期間、年化報酬率
 
-
+import pandas as pd
 
 
 def calc_sharpe(daily_pnl: pd.Series,
@@ -20,7 +20,7 @@ def calc_sharpe(daily_pnl: pd.Series,
         sharpe : 年化 Sharpe ratio
                  例如：1.87，代表每承受一單位風險可獲得 1.87 單位報酬
     """
-
+    
 
 def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     """
