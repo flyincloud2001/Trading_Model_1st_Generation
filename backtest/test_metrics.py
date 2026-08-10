@@ -145,7 +145,7 @@ def summarize(results: pd.DataFrame,
         pnl_cumulative = (1 + pnl_daily).cumprod()
 
         metric = {
-            'sharp_ratio': calc_sharpe(pnl_daily, periods_per_year),
+            'sharpe_ratio': calc_sharpe(pnl_daily, periods_per_year),
             'apr': calc_apr(pnl_daily, periods_per_year),
             'max_drawdown': calc_max_drawdown(pnl_cumulative)['max_drawdown'],
             'max_drawdown_duration': calc_max_drawdown(pnl_cumulative)['max_drawdown_duration']
@@ -160,7 +160,8 @@ def summarize(results: pd.DataFrame,
     }
 
     for split_name, metric in summary.items():
-        print(f'')
+        print(f'夏普比率: {metric['sharpe_ratio']}')
+        print(f'年化率')
 # ============================================================
 # 直接執行此檔案時的測試用範例
 # ============================================================
