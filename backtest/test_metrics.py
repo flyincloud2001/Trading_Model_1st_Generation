@@ -22,7 +22,9 @@ def calc_sharpe(pnl_daily: pd.Series,
                  例如：1.87，代表每承受一單位風險可獲得 1.87 單位報酬
     """
     std_daily = pnl_daily.std()
-    std_annaul = np.sqrt(periods_per_year) * 
+    std_annual = np.sqrt(periods_per_year) * pnl_daily / std_daily
+
+    return std_annual
 
 def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     """
