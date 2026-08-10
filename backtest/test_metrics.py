@@ -143,7 +143,7 @@ def summarize(results: pd.DataFrame,
         # 重新計算測試集的累積報酬（從 0 開始）
         pnl_daily = df['pnl_daily']
         pnl_cumulative = (1 + pnl_daily).cumprod()
-        
+        sharp_ratio = 
     # 印出摘要
 
 
