@@ -183,8 +183,10 @@ if __name__ == "__main__":
     coint_result = cadf_test(gld, gdx)
     lookback = int(coint_result["half_life"])
 
+    # 以下這兩行已經不存在，因為hedge_ratio已被設為固定
     hedge_ratios = calc_rolling_hedge_ratio(gld, gdx, lookback)
     spread = calc_spread(gld, gdx, hedge_ratios)
+
     zscore = calc_zscore(spread, lookback)
     signals = generate_signals(zscore)
 
