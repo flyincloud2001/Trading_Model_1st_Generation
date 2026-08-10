@@ -148,13 +148,13 @@ def summarize(results: pd.DataFrame,
         # 重新計算測試集的累積報酬（從 0 開始）
         pnl_daily = df['pnl_daily']
         pnl_cumulative = (1 + pnl_daily).cumprod() - 1
-        dd = 
-        
+        dd = calc_max_drawdown(pnl_cumulative)
+
         metric = {
             'sharpe_ratio': calc_sharpe(pnl_daily, periods_per_year),
             'apr': calc_apr(pnl_cumulative, periods_per_year),
-            'max_drawdown': calc_max_drawdown(pnl_cumulative)['max_drawdown'],
-            'max_drawdown_duration': calc_max_drawdown(pnl_cumulative)['max_drawdown_duration']
+            'max_drawdown': dd['max_drawdown'],
+            'max_drawdown_duration': dd['max_drawdown_duration']
         }
 
         return metric
