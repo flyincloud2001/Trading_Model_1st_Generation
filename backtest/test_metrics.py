@@ -177,4 +177,5 @@ if __name__ == "__main__":
     import pandas as pd
     import numpy as np
     from data.loader import load_multiple
+    from strategy.cointegration import cadf_test
     from strategy.
