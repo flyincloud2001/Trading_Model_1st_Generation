@@ -141,8 +141,8 @@ def summarize(results: pd.DataFrame,
     """
     # 分割訓練集與測試集
     split_ratio = int(len(results) * train_ratio)
-    result_train = results[:split_ratio]
-    result_test = results[split_ratio:]
+    result_train = results.iloc[:split_ratio]
+    result_test = results.iloc[split_ratio:]
 
     def _calc_metrics(df: pd.DataFrame) -> dict:
         # 重新計算測試集的累積報酬（從 0 開始）
