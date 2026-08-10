@@ -185,4 +185,4 @@ if __name__ == "__main__":
     gld = data['GLD']['Close']
     gdx = data['GDX']['Close']
 
-    
+    gld
