@@ -166,7 +166,7 @@ def summarize(results: pd.DataFrame,
     }
 
     for split_name, metric in summary.items():
-        print('\n 訓練集') if 'train' == split_name else print('\n測試集')
+        print('\n訓練集') if 'train' == split_name else print('\n測試集')
         print(f'夏普比率: {metric['sharpe_ratio']}')
         print(f'年化率: {metric['apr']}')
         print(f'最大回撤: {metric['max_drawdown']}')
