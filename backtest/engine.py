@@ -108,3 +108,12 @@ if __name__ == "__main__":
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
     print(f"持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
+
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(figsize=(12, 5))
+    ax.plot(spread, label='Residuals')
+    ax.plot(spread, label='potition')
+    ax.legend()
+    ax.set_title('Residuals')
+    plt.tight_layout()
+    plt.show()
