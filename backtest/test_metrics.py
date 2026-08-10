@@ -148,7 +148,7 @@ def summarize(results: pd.DataFrame,
             'sharp_ratio': calc_sharpe(pnl_daily),
             'apr': calc_apr(pnl_daily),
             'max_drawdown': calc_max_drawdown(pnl_daily)['max_drawdown'],
-            'max_drawdown_duration': 
+            'max_drawdown_duration': calc_max_drawdown(pnl_daily)
         }
     # 印出摘要
 
