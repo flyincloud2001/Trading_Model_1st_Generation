@@ -99,7 +99,7 @@ if __name__ == "__main__":
     lookback = cadf_result['half_life']
 
     zscore = calc_zscore(spread, int(lookback))
-    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
+    signals = generate_signals(zscore, entry_zscore=5.0, exit_zscore=0.3)
     
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
 
