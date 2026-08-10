@@ -148,7 +148,8 @@ def summarize(results: pd.DataFrame,
         # 重新計算測試集的累積報酬（從 0 開始）
         pnl_daily = df['pnl_daily']
         pnl_cumulative = (1 + pnl_daily).cumprod() - 1
-
+        dd = 
+        
         metric = {
             'sharpe_ratio': calc_sharpe(pnl_daily, periods_per_year),
             'apr': calc_apr(pnl_cumulative, periods_per_year),
