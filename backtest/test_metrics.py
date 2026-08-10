@@ -59,7 +59,7 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     high_watermark = cumulative_return_.cummax()
 
     # 計算每日回撤
-    drawdown = high_watermark - cumulative_return_
+    drawdown = (cumulative_return_ - high_watermark) / high_watermark
 
     # 最大回撤
     max_drawdown = drawdown.min()
