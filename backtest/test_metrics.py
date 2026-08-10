@@ -197,6 +197,7 @@ if __name__ == "__main__":
 
     lookback = int(half_life)
     zscore = calc_zscore(spread, lookback)
-    signals = generate_signals(zscore)
+    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.4)
+    
     backtest_result = run_backtest(gld_in_sample, gdx_in_sample, hedge_ratio, signals)
     summary = summarize()
