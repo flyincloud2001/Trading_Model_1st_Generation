@@ -5,7 +5,7 @@
 import pandas as pd
 
 
-def calc_sharpe(daily_pnl: pd.Series,
+def calc_sharpe(pnl_daily: pd.Series,
                 periods_per_year: int = 252) -> float:
     """
     計算年化 Sharpe ratio。
@@ -20,6 +20,7 @@ def calc_sharpe(daily_pnl: pd.Series,
         sharpe : 年化 Sharpe ratio
                  例如：1.87，代表每承受一單位風險可獲得 1.87 單位報酬
     """
+    std_daily = pnl_daily.std()
     
 
 def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
