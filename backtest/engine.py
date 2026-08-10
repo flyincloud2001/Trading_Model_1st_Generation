@@ -104,7 +104,10 @@ if __name__ == "__main__":
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
 
     print(backtest_result.tail(10))
+
+    std = spread.rolling(window=lookback).std()
     print(f'std = {std}')
+    
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
     print(f"持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
