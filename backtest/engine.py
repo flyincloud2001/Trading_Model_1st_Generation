@@ -100,9 +100,9 @@ if __name__ == "__main__":
 
     zscore = calc_zscore(spread, int(lookback))
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
-    signal_absolute = generate_signals_absolute(spread, entry_zscore=10, exit_zscore=2)
+    signals_absolute = generate_signals_absolute(spread, entry_zscore=10, exit_zscore=2)
     
-    backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
+    backtest_result = run_backtest(gld, gdx, hedge_ratio, signals_absolute)
 
     print(backtest_result.tail(10))
 
