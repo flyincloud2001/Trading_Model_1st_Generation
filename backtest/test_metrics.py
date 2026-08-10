@@ -178,7 +178,7 @@ if __name__ == "__main__":
     import numpy as np
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
-    from strategy.signals import generate_signals
+    from strategy.signals import generate_signals, calc_zscore
     from backtest.engine import run_backtest
 
     data = load_multiple(['GLD', 'GDX'])
@@ -195,6 +195,8 @@ if __name__ == "__main__":
     hedge_ratio = cadf_result['hedge_ratio']
     spread = cadf_result['spread']
 
-    
+    lookback = int(half_life)
+    zscore = calc_zscore(spread, lookback)
+    signals = generate_signals(zscore)
     backtest_result = run_backtest(gld_in_sample, gdx_in_sample, hedge_ratio, signals)
     summary = summarize()
