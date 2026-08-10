@@ -97,9 +97,14 @@ def calc_apr(cumulative_return: pd.Series,
               例如：0.124，代表年化報酬 12.4%
               注意：若回測期間不足一年，此數字可能極端，需謹慎解讀
     """
-    
+
+
     # apr = annualized percentage return
-    n_period = len(cumulative_return)
+    n_periods = len(cumulative_return)
+
+    if n_periods < periods_per_year:
+        print("[metrics] 警告：回測期間不足一年，APR 數值僅供參考。")
+    
     apr = (1 + cumulative_return[-1]) ** (periods_per_year / n_period) - 1
 
     return round(apr, 4)
