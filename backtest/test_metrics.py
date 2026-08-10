@@ -71,7 +71,7 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     for drawdown in drawdown:
         if drawdown < 0:
             drawdown_duration += 1
-            max_drawdown_duration = np.max(drawdown_duration, max_drawdown_duration) 
+            max_drawdown_duration = max(drawdown_duration, max_drawdown_duration) 
         else:
             drawdown_duration = 0
 
