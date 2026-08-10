@@ -100,7 +100,7 @@ def calc_apr(cumulative_return: pd.Series,
     
     # apr = annualized percentage return
     n_period = len(cumulative_return)
-    apr = (1 + cumulative_return) ** (periods_per_year / n_period) - 1
+    apr = (1 + cumulative_return[-1]) ** (periods_per_year / n_period) - 1
 
     return round(apr, 4)
 
