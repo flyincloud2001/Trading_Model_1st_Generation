@@ -151,10 +151,16 @@ def summarize(results: pd.DataFrame,
             'max_drawdown_duration': calc_max_drawdown(pnl_cumulative)['max_drawdown_duration']
         }
 
-    
+        return metric
+
     # 印出摘要
+    summary = {
+        'train': _calc_metrics(result_train),
+        'test': _calc_metrics(result_test)
+    }
 
-
+    for split_name, metric in summary.items():
+        print(f'')
 # ============================================================
 # 直接執行此檔案時的測試用範例
 # ============================================================
