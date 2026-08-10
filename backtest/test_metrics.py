@@ -76,7 +76,7 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
             drawdown_duration = 0
 
     result = {
-        'max_drawdown': max_drawdown,
+        'max_drawdown': round(max_drawdown, 2), 
         'max_drawdown_duration': max_drawdown_duration
     }
 
