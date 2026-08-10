@@ -26,9 +26,9 @@ def calc_sharpe(pnl_daily: pd.Series,
     if std_daily == 0:
         return 0.0
     
-    std_annual = np.sqrt(periods_per_year) * pnl_daily.mean() / std_daily
+    sharpe = np.sqrt(periods_per_year) * pnl_daily.mean() / std_daily
 
-    return round(std_annual, 2)
+    return round(sharpe, 2)
 
 def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     """
