@@ -28,7 +28,7 @@ def calc_sharpe(pnl_daily: pd.Series,
     
     std_annual = np.sqrt(periods_per_year) * pnl_daily / std_daily
 
-    return std_annual
+    return round(std_annual, 2)
 
 def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     """
@@ -135,7 +135,8 @@ def summarize(results: pd.DataFrame,
                   }
     """
     # 分割訓練集與測試集
-
+    split_ratio = int(len(results))
+    result_train = 
     def _calc_metrics(df: pd.DataFrame) -> dict:
         # 重新計算測試集的累積報酬（從 0 開始）
 
