@@ -83,7 +83,7 @@ if __name__ == "__main__":
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
-    from strategy.signals import calc_zscore, generate_signals
+    from strategy.signals import calc_zscore, generate_signals, generate_signals_absolute
     import pandas as pd
 
     data = load_multiple(['GLD', 'GDX'])
@@ -100,6 +100,7 @@ if __name__ == "__main__":
 
     zscore = calc_zscore(spread, int(lookback))
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
+    signal_absolute = generate_signals_absolute(spread, entry_zscore=10, exit_zscore=2)
     
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
 
