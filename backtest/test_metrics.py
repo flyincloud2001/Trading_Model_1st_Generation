@@ -151,7 +151,7 @@ def summarize(results: pd.DataFrame,
             'max_drawdown_duration': calc_max_drawdown(pnl_cumulative)['max_drawdown_duration']
         }
 
-    print(f'夏普比率: ')
+    
     # 印出摘要
 
 
