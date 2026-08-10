@@ -65,19 +65,19 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     max_drawdown = drawdown.max() - 1
 
     # 計算回撤期間
-    drawdown_period = 0
-    max_drawdown_period = 0
+    drawdown_duration = 0
+    max_drawdown_duration = 0
 
     for drawdown in drawdown:
         if drawdown < 0:
-            drawdown_period += 1
-            max_drawdown_period = np.max(drawdown_period, max_drawdown_period) 
+            drawdown_duration += 1
+            max_drawdown_duration = np.max(drawdown_duration, max_drawdown_duration) 
         else:
-            drawdown_period = 0
+            drawdown_duration = 0
 
     result = {
         'max_drawdown': max_drawdown,
-        'max_drawdown_period': max_drawdown_period
+        'max_drawdown_period': max_drawdown_duration
     }
 
     return result
