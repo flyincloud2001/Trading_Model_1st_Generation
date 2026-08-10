@@ -179,4 +179,10 @@ if __name__ == "__main__":
     from data.loader import load_multiple
     from strategy.cointegration import cadf_test
     from strategy.signals import generate_signals
+    from backtest.engine import run_backtest
+
+    data = load_multiple(['GLD', 'GDX'])
+    gld = data['GLD']['Close']
+    gdx = data['GDX']['Close']
+
     
