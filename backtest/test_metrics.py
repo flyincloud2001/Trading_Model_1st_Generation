@@ -105,7 +105,7 @@ def calc_apr(cumulative_return: pd.Series,
     if n_periods < periods_per_year:
         print("[metrics] 警告：回測期間不足一年，APR 數值僅供參考。")
     
-    apr = (1 + cumulative_return.iloc[-1]) ** (periods_per_year / n_period) - 1
+    apr = (1 + cumulative_return.iloc[-1]) ** (periods_per_year / n_periods) - 1
 
     return round(apr, 4)
 
