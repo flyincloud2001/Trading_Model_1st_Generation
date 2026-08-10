@@ -204,5 +204,8 @@ if __name__ == "__main__":
     zscore = calc_zscore(spread, lookback)
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.4)
 
+    # 目前backtest用的是in_sample的數據
+    # 但是summarize()的設計是需要輸入完整的數據(in_sample + our_sample)
+    # 這部分需要修改
     backtest_result = run_backtest(gld_in_sample, gdx_in_sample, hedge_ratio, signals)
     summary = summarize(backtest_result)
