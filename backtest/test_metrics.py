@@ -195,4 +195,5 @@ if __name__ == "__main__":
     hedge_ratio = cadf_result['hedge_ratio']
     spread = cadf_result['spread']
 
-    summary = 
+    backtest_result = run_backtest()
+    summary = summarize()
