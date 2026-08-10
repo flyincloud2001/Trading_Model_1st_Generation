@@ -147,9 +147,11 @@ def summarize(results: pd.DataFrame,
         metric = {
             'sharp_ratio': calc_sharpe(pnl_daily, periods_per_year),
             'apr': calc_apr(pnl_daily, periods_per_year),
-            'max_drawdown': calc_max_drawdown(pnl_cumulative, periods_per_year)['max_drawdown'],
-            'max_drawdown_duration': calc_max_drawdown(pnl_cumulative, periods_per_year)
+            'max_drawdown': calc_max_drawdown(pnl_cumulative)['max_drawdown'],
+            'max_drawdown_duration': calc_max_drawdown(pnl_cumulative)['max_drawdown_duration']
         }
+
+    print(f'夏普比率: ')
     # 印出摘要
 
 
