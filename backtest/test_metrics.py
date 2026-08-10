@@ -190,4 +190,4 @@ if __name__ == "__main__":
 
     gld_in_sample, gdx_in_sample = gld_in_sample.align(gdx_in_sample, join='inner')
 
-    
+    cadf_result = 
