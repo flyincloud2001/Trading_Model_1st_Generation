@@ -59,12 +59,13 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     high_watermark = cumulative_return_.cummax()
 
     # 計算每日回撤
-    drawdown = high
+    drawdown = high_watermark - cumulative_return_
 
     # 最大回撤
+    max_drawdown = drawdown.max()
 
     # 計算回撤期間
-
+    
 
 def calc_apr(cumulative_return: pd.Series,
              periods_per_year: int = 252) -> float:
