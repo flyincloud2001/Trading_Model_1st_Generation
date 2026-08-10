@@ -192,4 +192,7 @@ if __name__ == "__main__":
 
     cadf_result = cadf_test(gld_in_sample, gdx_in_sample)
     half_life = cadf_result['half_life']
-    
+    hedge_ratio = cadf_result['hedge_ratio']
+    spread = cadf_result['spread']
+
+    summary = 
