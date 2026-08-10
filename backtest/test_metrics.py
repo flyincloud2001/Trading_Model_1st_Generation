@@ -62,7 +62,7 @@ def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     drawdown = high_watermark - cumulative_return_
 
     # 最大回撤
-    max_drawdown = drawdown.max()
+    max_drawdown = drawdown.max() - 1
 
     # 計算回撤期間
     
