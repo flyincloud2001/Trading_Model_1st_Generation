@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
     print(backtest_result.tail(10))
 
-    std = spread.rolling(window=20).std()
+    std = spread.rolling(window=20).std().mean()
     print(f'std = {std}')
 
     holding_days = (backtest_result['signal'] != 0).sum()
