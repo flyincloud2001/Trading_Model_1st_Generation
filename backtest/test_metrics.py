@@ -3,6 +3,7 @@
 # 包含：Sharpe ratio、最大回撤、最大回撤期間、年化報酬率
 
 import pandas as pd
+import numpy as np
 
 
 def calc_sharpe(pnl_daily: pd.Series,
@@ -21,7 +22,7 @@ def calc_sharpe(pnl_daily: pd.Series,
                  例如：1.87，代表每承受一單位風險可獲得 1.87 單位報酬
     """
     std_daily = pnl_daily.std()
-    
+    std_annaul = np.sqrt(periods_per_year) * 
 
 def calc_max_drawdown(cumulative_return: pd.Series) -> dict:
     """
