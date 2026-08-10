@@ -112,8 +112,14 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.plot(spread, label='Residuals')
-    ax.plot(spread, label='potition')
+    ax_ = ax.twinx()
+    ax_.plot(spread, label='potition')
     ax.legend()
     ax.set_title('Residuals')
     plt.tight_layout()
     plt.show()
+
+    ax2 = ax1.twinx()
+ax1.plot(data_plot[SYMBOL], color='steelblue', linewidth=1, label='PG 收盤價')
+ax2.plot(data_plot['Position'], color='orange', linewidth=0.8,
+        linestyle='--', label='倉位')
