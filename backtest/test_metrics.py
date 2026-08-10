@@ -98,6 +98,11 @@ def calc_apr(cumulative_return: pd.Series,
               注意：若回測期間不足一年，此數字可能極端，需謹慎解讀
     """
     
+    # apr = annualized percentage return
+    n_period = len(cumulative_return)
+    apr = (1 + cumulative_return) ** (periods_per_year / n_period) - 1
+
+    return round(apr, 4)
 
 def summarize(results: pd.DataFrame,
               train_ratio: float = 0.5,
