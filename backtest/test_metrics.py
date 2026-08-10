@@ -160,6 +160,7 @@ def summarize(results: pd.DataFrame,
     }
 
     for split_name, metric in summary.items():
+        print(f'')
         print(f'夏普比率: {metric['sharpe_ratio']}')
         print(f'年化率: {metric['apr']}')
         print(f'最大回撤: {metric['max_drawdown']}')
