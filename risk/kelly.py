@@ -101,11 +101,11 @@ def calc_position_size(account_equity: float,
     # 實際部署資金
     capital_deployed = account_equity * leverage
 
-    # Y 資產的持倉股數（以部署資金的一半買 Y）
+    # Y 腿：投入 capital_deployed / 2
     shares_y = int(capital_deployed / 2 / price_y)
 
-    # X 資產的持倉股數（依 hedge ratio 計算）
-    shares_x = int(shares_y * hedge_ratio)
+    # X 腿：投入 capital_deployed / 2（對稱），與 hedge_ratio 無關
+    shares_x = int(capital_deployed / 2 / price_x)
 
     position = {
         "capital_deployed": round(capital_deployed, 2),
