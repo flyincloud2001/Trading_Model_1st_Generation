@@ -114,8 +114,8 @@ def calc_position_size(account_equity: float,
     }
 
     return position
-
-
+# share_y * price_y = capital_deployed / 2
+# share_x * price_x = (capital_deployed / 2 / price_y) * hedge_ratio * price_x = capital_deployed / 2 
 def summarize_leverage(leverage: pd.Series) -> None:
     """
     印出槓桿序列的統計摘要，方便檢查風險管理效果。
