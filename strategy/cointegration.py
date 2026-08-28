@@ -45,7 +45,7 @@ def cadf_test(series_y: pd.Series,
     hedge_ratio = ols_result.params.iloc[1]
     residuals = ols_result.resid
 
-    # 步驟二：對殘差做 ADF 檢定
+    # 步驟二：對殘差做 ADF 檢定(Augmented Dickey-Fuller Test)
     adf_result = adfuller(residuals, autolag="AIC")
     adf_statistic = adf_result[0]
     p_value = adf_result[1]
