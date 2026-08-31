@@ -99,8 +99,8 @@ if __name__ == "__main__":
     gld = data['GLD']['Close']
     gdx = data['GDX']['Close']
 
-    gld =  gld[gld.index >= gld.index.max() - pd.DateOffset(years=2)]
-    gdx =  gdx[gdx.index >= gdx.index.max() - pd.DateOffset(years=2)]
+    gld =  gld[gld.index >= gld.index.max() - pd.DateOffset(years=5)]
+    gdx =  gdx[gdx.index >= gdx.index.max() - pd.DateOffset(years=5)]
 
     gld, gdx = gld.align(gdx, join='inner')
 
