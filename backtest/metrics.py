@@ -110,7 +110,6 @@ def calc_apr(cumulative_return: pd.Series,
     return round(apr, 4)
 
 def summarize(results: pd.DataFrame,
-              train_ratio: float = 0.5,
               periods_per_year: int = 252) -> dict:
     """
     對回測結果計算完整績效摘要。
