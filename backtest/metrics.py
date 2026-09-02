@@ -114,36 +114,21 @@ def summarize(results: pd.DataFrame,
               periods_per_year: int = 252) -> dict:
     """
     對回測結果計算完整績效摘要。
-    自動將資料分為訓練集與測試集，分別計算績效。
 
     參數：
         results          : 來自 engine.py 的回測結果 DataFrame
-        train_ratio      : 訓練集比例，預設 0.5（前 50% 為訓練集）
         periods_per_year : 一年的交易期數，預設 252
 
     回傳：
         summary : 包含訓練集與測試集績效的字典
                   例如：
                   {
-                      "train": {
-                          "sharpe": 2.31,
-                          "apr": 0.183,
-                          "max_drawdown": -0.072,
-                          "max_drawdown_duration": 45
-                      },
-                      "test": {
-                          "sharpe": 1.54,
-                          "apr": 0.124,
-                          "max_drawdown": -0.105,
-                          "max_drawdown_duration": 120
-                      }
+                    "sharpe": 2.31,
+                    "apr": 0.183,
+                    "max_drawdown": -0.072,
+                    "max_drawdown_duration": 45
                   }
     """
-    # 分割訓練集與測試集
-    split_ratio = int(len(results) * train_ratio)
-    result_train = results.iloc[:split_ratio]
-    result_test = results.iloc[split_ratio:]
-
     def _calc_metrics(df: pd.DataFrame) -> dict:
         # 重新計算測試集的累積報酬（從 0 開始）
         pnl_daily = df['pnl_daily']
