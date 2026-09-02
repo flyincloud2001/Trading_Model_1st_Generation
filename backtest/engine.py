@@ -85,6 +85,7 @@ if __name__ == "__main__":
     from strategy.cointegration import cadf_test
     from strategy.signals import calc_zscore, generate_signals, generate_signals_absolute
     import pandas as pd
+    import matplotlib.pyplot as plt
 
     data = load_multiple(['GLD', 'GDX'])
     gld = data['GLD']['Close']
@@ -100,7 +101,6 @@ if __name__ == "__main__":
 
     zscore = calc_zscore(spread, int(lookback))
 
-
 # ----------------- Result for Spread --------------------------
     signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
@@ -110,7 +110,6 @@ if __name__ == "__main__":
     total_days = len(backtest_result)
     print(f"spread result持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
 
-    import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.plot(spread, label='Residuals', color='steelblue')
     ax_ = ax.twinx()
@@ -130,7 +129,6 @@ if __name__ == "__main__":
     total_days_absolute = len(backtest_result_absolute)
     print(f"absolute-spread result持倉天數：{holding_days_absolute} / {total_days_absolute}（{holding_days_absolute/total_days_absolute:.1%}）")
 
-    import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.plot(spread, label='Residuals_Absolute', color='steelblue')
     ax_ = ax.twinx()
