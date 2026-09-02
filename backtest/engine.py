@@ -119,6 +119,17 @@ if __name__ == "__main__":
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.plot(spread, label='Residuals', color='steelblue')
     ax_ = ax.twinx()
+    ax_.plot(signals['signal'], label='position', color='orange', linewidth=0.8,
+        linestyle='--')
+    ax.legend()
+    ax.set_title('Residuals')
+    plt.tight_layout()
+    plt.show()
+
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(figsize=(12, 5))
+    ax.plot(spread, label='Residuals', color='steelblue')
+    ax_ = ax.twinx()
     ax_.plot(signals_absolute['signal'], label='position', color='orange', linewidth=0.8,
         linestyle='--')
     ax.legend()
