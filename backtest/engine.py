@@ -128,7 +128,7 @@ if __name__ == "__main__":
 
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
-    ax.plot(spread, label='Residuals', color='steelblue')
+    ax.plot(spread, label='Residuals_Absolute', color='steelblue')
     ax_ = ax.twinx()
     ax_.plot(signals_absolute['signal'], label='position', color='orange', linewidth=0.8,
         linestyle='--')
