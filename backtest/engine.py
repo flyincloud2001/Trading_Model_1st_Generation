@@ -106,6 +106,7 @@ if __name__ == "__main__":
     backtest_result_absolute = run_backtest(gld, gdx, hedge_ratio, signals_absolute)
 
     print(backtest_result.tail(10))
+    print(backtest_result_absolute.tail(10))
 
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
