@@ -110,7 +110,11 @@ if __name__ == "__main__":
 
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
-    print(f"持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
+    print(f"spread result持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
+
+    holding_days_absolute = (backtest_result_absolute['signal'] != 0).sum()
+    total_days_absolute = len(backtest_result_absolute)
+    print(f"absolute-spread result持倉天數：{holding_days_absolute} / {total_days_absolute}（{holding_days_absolute/total_days_absolute:.1%}）")
 
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
