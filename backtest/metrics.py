@@ -146,12 +146,10 @@ def summarize(results: pd.DataFrame,
     # 印出摘要
     summary = _calc_metrics(results)
 
-    for name, metric in summary:
-        print('\n訓練集') if 'train' == name else print('\n測試集')
-        print(f'夏普比率: {metric['sharpe_ratio']}')
-        print(f'年化率: {metric['apr']}')
-        print(f'最大回撤: {metric['max_drawdown']}')
-        print(f'最大回撤時間: {metric['max_drawdown_duration']}')
+    print(f'夏普比率: {summary['sharpe_ratio']}')
+    print(f'年化率: {summary['apr']}')
+    print(f'最大回撤: {summary['max_drawdown']}')
+    print(f'最大回撤時間: {summary['max_drawdown_duration']}')
 
     return summary
 # ============================================================
