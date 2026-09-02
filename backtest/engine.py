@@ -106,12 +106,11 @@ if __name__ == "__main__":
     backtest_result_absolute = run_backtest(gld, gdx, hedge_ratio, signals_absolute)
 
     print(backtest_result.tail(10))
-    print(backtest_result_absolute.tail(10))
-
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
     print(f"spread result持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
 
+    print(backtest_result_absolute.tail(10))
     holding_days_absolute = (backtest_result_absolute['signal'] != 0).sum()
     total_days_absolute = len(backtest_result_absolute)
     print(f"absolute-spread result持倉天數：{holding_days_absolute} / {total_days_absolute}（{holding_days_absolute/total_days_absolute:.1%}）")
