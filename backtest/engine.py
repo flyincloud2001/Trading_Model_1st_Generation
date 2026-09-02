@@ -122,7 +122,7 @@ if __name__ == "__main__":
     ax_.plot(signals['signal'], label='position', color='orange', linewidth=0.8,
         linestyle='--')
     ax.legend()
-    ax.set_title('Residuals_Absolute')
+    ax.set_title('Residuals')
     plt.tight_layout()
     plt.show()
 
@@ -133,6 +133,6 @@ if __name__ == "__main__":
     ax_.plot(signals_absolute['signal'], label='position', color='orange', linewidth=0.8,
         linestyle='--')
     ax.legend()
-    ax.set_title('Residuals')
+    ax.set_title('Residuals_Absolute')
     plt.tight_layout()
     plt.show()
