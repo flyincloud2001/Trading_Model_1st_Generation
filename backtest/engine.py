@@ -99,21 +99,16 @@ if __name__ == "__main__":
     lookback = cadf_result['half_life']
 
     zscore = calc_zscore(spread, int(lookback))
-    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
-    signals_absolute = generate_signals_absolute(spread, entry_threshold=10, exit_threshold=2)
 
+
+# ----------------- Result for Spread --------------------------
+    signals = generate_signals(zscore, entry_zscore=2.0, exit_zscore=0.3)
     backtest_result = run_backtest(gld, gdx, hedge_ratio, signals)
-    backtest_result_absolute = run_backtest(gld, gdx, hedge_ratio, signals_absolute)
 
     print(backtest_result.tail(10))
     holding_days = (backtest_result['signal'] != 0).sum()
     total_days = len(backtest_result)
     print(f"spread result持倉天數：{holding_days} / {total_days}（{holding_days/total_days:.1%}）")
-
-    print(backtest_result_absolute.tail(10))
-    holding_days_absolute = (backtest_result_absolute['signal'] != 0).sum()
-    total_days_absolute = len(backtest_result_absolute)
-    print(f"absolute-spread result持倉天數：{holding_days_absolute} / {total_days_absolute}（{holding_days_absolute/total_days_absolute:.1%}）")
 
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
@@ -125,6 +120,15 @@ if __name__ == "__main__":
     ax.set_title('Residuals')
     plt.tight_layout()
     plt.show()
+
+# ----------------- Result for Absolute Spread --------------------------
+    signals_absolute = generate_signals_absolute(spread, entry_threshold=10, exit_threshold=2)
+    backtest_result_absolute = run_backtest(gld, gdx, hedge_ratio, signals_absolute)
+
+    print(backtest_result_absolute.tail(10))
+    holding_days_absolute = (backtest_result_absolute['signal'] != 0).sum()
+    total_days_absolute = len(backtest_result_absolute)
+    print(f"absolute-spread result持倉天數：{holding_days_absolute} / {total_days_absolute}（{holding_days_absolute/total_days_absolute:.1%}）")
 
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(12, 5))
